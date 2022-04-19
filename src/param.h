@@ -93,6 +93,16 @@ SI_PARAMETERS;
 
 typedef struct
   {
+  U32       help;
+  U32       verbose;
+  char      **filenames;
+  U32       nFiles;
+  U64       max;
+  }
+PA_PARAMETERS;
+
+typedef struct
+  {
   ALPHABET  *A;
   char      *alphabet;
   U32       nSym;

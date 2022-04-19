@@ -418,7 +418,7 @@ void PrintParametersLR(LR_PARAMETERS *M)
   "no" : "yes");
   fprintf(stderr, "[>] DNA mode ....................... %s\n", M->dna == 0 ? 
   "no" : "yes");
-  fprintf(stderr, "[>] Low-pass filter weight ......... %.3lf\n", M->weight);
+  fprintf(stderr, "[>] Low-pass window size ........... %u\n", M->window);
   for(n = 0 ; n < M->nModels ; ++n){
     fprintf(stderr, "[>] Target model %d:\n", n+1);
     fprintf(stderr, "  [+] Context order ................ %u\n",

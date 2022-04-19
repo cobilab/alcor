@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <pthread.h>
+#include <assert.h>
 
 #include "lr.h"
 #include "defs.h"
@@ -484,6 +485,16 @@ void CompressAction(THREADS *T)
   }
 
 //////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - M O V I N G   A V E R A G E   F I L T E R - - - - - - - -
+//
+double MovAvgInstant(double *f, double *pS, uint32_t p, uint32_t l, double n)
+  {
+  *pS = *pS - f[p] + n;
+  f[p] = n;
+  return *pS / l;
+  }
+
+//////////////////////////////////////////////////////////////////////////////
 // - - - - - - - - - - L O C A L   R E D U N D A N C Y - - - - - - - - - - - -
 //
 void LocalRedundancy(LR_PARAMETERS *MAP)
@@ -503,29 +514,29 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
 
   uint64_t x = 0;
 
-  if(MAP->verbose) PrintMessage("Loading alphabet ...");
-  MAP->A = CreateAlphabet();
-  LoadAlphabet(MAP->A, MAP->filename);
-  MAP->nSym = MAP->A->cardinality;
-  if(MAP->verbose) PrintAlphabet(MAP->A);
+  if(P->verbose) PrintMessage("Loading alphabet ...");
+  P->A = CreateAlphabet();
+  LoadAlphabet(P->A, P->filename);
+  P->nSym = P->A->cardinality;
+  if(P->verbose) PrintAlphabet(P->A);
 
-  if(MAP->dna == 1)
+  if(P->dna == 1)
     {
-    MAP->nSym = 4;
-    if(MAP->verbose)
+    P->nSym = 4;
+    if(P->verbose)
       PrintMessage("Adapting alphabet to 4 symbols {ACGT} (flag --dna on)");
     }
   
-  if(MAP->threshold == 0)
-    MAP->threshold = (double) log2(MAP->nSym) / 2.0;
-  if(MAP->verbose)
-    fprintf(stderr, "[>] Threshold: %.3lf\n", MAP->threshold);
+  if(P->threshold == 0)
+    P->threshold = (double) log2(P->nSym) / 2.0;
+  if(P->verbose)
+    fprintf(stderr, "[>] Threshold: %.3lf\n", P->threshold);
 
   // ===========================================================================
 
-  if(MAP->verbose) PrintMessage("Spliting and reversing streams ...");
+  if(P->verbose) PrintMessage("Spliting and reversing streams ...");
 
-  FILE *IN   = Fopen(MAP->filename, "r");
+  FILE *IN   = Fopen(P->filename, "r");
   FILE *OUT1 = Fopen(".lrcr_1.seq", "w");
   FILE *OUT2 = Fopen(".lrcr_2.seq", "w");
 
@@ -556,34 +567,30 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   fclose(IN2);
   fclose(OUT2);
 
-  if(MAP->verbose) PrintMessage("Done!");
+  if(P->verbose) PrintMessage("Done!");
 
   // COMPRESSING ==============================================================
   // 
  
-  if(MAP->verbose) PrintMessage("Compressing streams ...");
+  if(P->verbose) PrintMessage("Compressing streams ...");
   CompressAction(T);
-  if(MAP->verbose) PrintMessage("Done!");
+  if(P->verbose) PrintMessage("Done!");
 
   // GET THE MINIMUM OF LR & RL DIRECTIONS, FILTER & SEGMENT ==================
   //
   
-  if(MAP->verbose) PrintMessage("Filtering and segmenting ...");
+  if(P->verbose) PrintMessage("Filtering and segmenting ...");
 
   FILE *IN_LR = Fopen(".lrcr_1.inf", "r");
   FILE *IN_RL = Fopen(".lrcr_2.inf", "r");
-  FILE *PROF  = Fopen(Cat(MAP->filename, ".info"), "w");
+  FILE *P_MIN = Fopen(".lrcr_1_2.inf", "w");
+  FILE *PROF  = Fopen(Cat(P->filename, ".info"), "w");
 
-  fseek(IN_RL, 0, SEEK_END );
+  fseek(IN_RL, 0, SEEK_END);
   char line_LR[1024];
   char line_RL[1024];
-  uint64_t idx = 0;
-  float smooth;
-  int region;
-  uint64_t initPos = 0;
-  uint64_t curr_pos = 0;
 
-  if(!P->nosize) fprintf(stdout, "#Length\t%"PRIu64"\n", nValues);
+  if(P->verbose) fprintf(stderr, "[>] Computing the minimum profile ...\n");
   
   while(Fgets_backwards(line_RL, 1024, IN_RL) != NULL)
     { 
@@ -593,27 +600,64 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
       PrintWarning("information files have been changed!");
       exit(1);
       }
+    double RL = atof(line_RL);
+    double LR = atof(line_LR);
+    double min = RL < LR ? RL : LR;
+    fprintf(P_MIN, "%.5lf\n", min);
+    }
+  fclose(P_MIN);
+  fclose(IN_RL);
+  fclose(IN_LR);
 
-    float RL = atof(line_RL);
-    float LR = atof(line_LR);
-    float min = RL < LR ? RL : LR;
+  remove(".lrcr_1.inf");
+  remove(".lrcr_2.inf");
 
-    if(idx++ == 0)
-      {
-      smooth = min;
-      region = min < MAP->threshold ? 0 : 1;
-      }
-    else 
-      smooth = smooth - (MAP->weight * (smooth - min));
+  if(P->verbose) fprintf(stderr, "[>] Smoothing the minimum profile ...\n");
 
-    fprintf(PROF, "%"PRIu64"\t%.3g\n", ++curr_pos, smooth);
+  uint64_t idx = 0;
+  double   newAvg = 0;
+  double   sum = 0;
+  char     buffer[1024];
+  double   *filt = (double *) Calloc(P->window + 1, sizeof(double));
+  FILE     *MIN_IN = Fopen(".lrcr_1_2.inf", "r");
 
-    if(smooth >= MAP->threshold) // LOW REGION = 0, HIGH REGION = 1
+  while(fgets(buffer, 1024, MIN_IN))
+    {
+    newAvg = MovAvgInstant(filt, &sum, idx, P->window, atof(buffer));
+    fprintf(PROF, "%lf\n", newAvg);
+    if(++idx == P->window) idx = 0;
+    }
+  fclose(MIN_IN);
+  fclose(PROF);
+  
+  remove(".lrcr_1_2.inf");
+
+  if(P->verbose) fprintf(stderr, "[>] Segmenting the regions ...\n");
+
+  FILE *PROF_IN = Fopen(Cat(P->filename, ".info"), "r");
+  if(!P->nosize) fprintf(stdout, "#Length\t%"PRIu64"\n", nValues);
+ 
+  int region;
+  double smooth, min;
+  uint64_t initPos = 1;
+
+  if(fgets(buffer, 1024, PROF_IN))
+    {
+    min = atof(buffer);
+    region = min < P->threshold ? 0 : 1;
+    }
+
+  idx = 1; 
+  while(fgets(buffer, 1024, PROF_IN))
+    {
+    ++idx;
+    smooth = atof(buffer);
+    if(smooth >= P->threshold) // LOW REGION = 0, HIGH REGION = 1
       {
       if(region == 0)
         {              
         region = 1; 
-        if(idx - initPos > MAP->ignore)	
+        if(idx - initPos > P->ignore)	
           fprintf(stdout, "%"PRIu64"\t%"PRIu64"\n", initPos, idx);
         }
       }
@@ -629,13 +673,11 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
 
   if(region == 0)
     {
-    if(idx - initPos > MAP->ignore)	  
+    if(idx - initPos > P->ignore)	  
     fprintf(stdout, "%"PRIu64"\t%"PRIu64"\n", initPos, idx);
     }
 
-  fclose(IN_LR);
-  fclose(IN_RL);
-  fclose(PROF);
+  fclose(PROF_IN);
 
   return;
   }

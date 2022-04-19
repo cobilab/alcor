@@ -92,7 +92,7 @@ typedef struct
   U8        dna;
   U8        nosize;
   double    threshold;
-  double    weight;
+  U32        window;
   U32       region;
   MODEL_PAR *model;
   U64       size;

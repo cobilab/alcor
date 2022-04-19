@@ -99,7 +99,8 @@ void P_LocalRedundancy(char **p, int c)
   MAP->dna       = ArgsState  (DEF_LR_DNA,       p, c, "-d", "--dna");
   MAP->nosize    = ArgsState  (DEF_LR_NOSIZE,    p, c, "-n", "--no-size");
   MAP->threshold = ArgsDouble (DEF_LR_THRESHOLD, p, c, "-t", "--threshold");
-  MAP->weight    = ArgsDouble (DEF_LR_WEIGHT,    p, c, "-w", "--weight");
+  MAP->window    = ArgsNum    (DEF_LR_WINDOW,    p, c, "-w", "--window",
+                              0, 999999999);
   MAP->ignore    = ArgsNum    (DEF_LR_IGNORE,    p, c, "-i", "--ignore",
                               0, 999999999);
   MAP->level     = ArgsNum    (0,                p, c, "-l", "--level",

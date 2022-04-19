@@ -71,6 +71,17 @@ typedef struct
   {
   U32       help;
   U32       verbose;
+  U8        fasta;
+  U64       init;
+  U64       end;
+  char      *filename;
+  }
+EX_PARAMETERS;
+
+typedef struct
+  {
+  U32       help;
+  U32       verbose;
   char      *alphabet;
   U8        dna;
   U32       nSym;
@@ -120,6 +131,7 @@ MODEL_PAR   ArgsUniqModelLR    (char *, uint8_t);
 MODEL_PAR   ArgsUniqModelSI    (char *, uint8_t);
 void        PrintParametersLR  (LR_PARAMETERS *);
 void        PrintParametersSI  (SI_PARAMETERS *);
+void        PrintParametersEX  (EX_PARAMETERS *);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

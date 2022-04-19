@@ -17,10 +17,53 @@
 #include "strings.h"
 #include "lr.h"
 #include "si.h"
+#include "ex.h"
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 LR_PARAMETERS  *MAP;
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void P_Extract(char **p, int c)
+  {
+  int n;
+
+  EX_PARAMETERS *MAP = (EX_PARAMETERS *) Calloc(1, sizeof(EX_PARAMETERS));
+
+  MAP->help        = ArgsState  (DEF_EX_HELP,    p, c, "-h", "--help");
+  MAP->verbose     = ArgsState  (DEF_EX_VERBOSE, p, c, "-v", "--verbose");
+  MAP->fasta       = ArgsState  (DEF_EX_FASTA  , p, c, "-f", "--fasta");
+  MAP->init        = ArgsNum    (DEF_EX_INIT,    p, c, "-i", "--init",
+		                1, 999999999);
+  MAP->end         = ArgsNum    (DEF_EX_END,     p, c, "-e", "--end",
+		                1, 999999999);
+
+  if(c < MIN_NPARAM_FOR_PROGS+1 || MAP->help)
+    {
+    PrintMenuEx();
+    return;
+    }
+
+  MAP->filename = p[c-1];
+  CheckFileEmpty(MAP->filename);
+  
+  if(MAP->verbose) PrintParametersEX(MAP);
+
+  // PRINT HEADER
+  if(MAP->fasta) fprintf(stdout, ">Extracted sequence [%"PRIu64";%"PRIu64"]\n",
+		 MAP->init, MAP->end);
+
+  Extract(MAP);
+
+  // PRINT TAIL
+  fprintf(stdout, "\n");
+
+  if(MAP->verbose) fprintf(stderr, "[>] Done!\n");
+
+  free(MAP);
+  return;
+  }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -194,7 +237,7 @@ int32_t main(int argc, char *argv[])
   switch(KeyString(argv[1]))
     {
     case K1: PrintMenu();                                   break;
-    //case K2: P_Extract                       (argv, argc);  break;
+    case K2: P_Extract                       (argv, argc);  break;
     case K3: P_LocalRedundancy               (argv, argc);  break;
     case K4: P_Simulation                    (argv, argc);  break;
     //case K5: P_Visualization                 (argv, argc);  break;

@@ -23,7 +23,7 @@ K_STRUCT;
 static K_STRUCT LT_KEYS[] = 
   { 
     { "help"          , K1  },  // HELP MENU
-    { "Extraction"    , K2  },  // EXTRACTION
+    { "extract"       , K2  },  // EXTRACTION
     { "redundancy"    , K3  },  // REDUNDANCY
     { "simulation"    , K4  },  // SIMULATION
     { "visual"        , K5  }   // VISUALIZATION 

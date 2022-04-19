@@ -128,6 +128,47 @@ void PrintModels(void){
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+void PrintMenuEx(void){
+  fprintf(stderr,
+  "NAME                                                                \n"
+  "      %s %s                                        \n"
+  "                                                                    \n"
+  "DESCRIPTION                                                         \n"
+  "      Extracts a sequence from a FASTA file using coordinates.      \n"
+  "                                                                    \n"
+  "PARAMETERS                                                          \n"
+  "                                                                    \n"
+  "      -h,  --help                                                   \n"
+  "           usage guide (help menu),                                 \n"
+  "                                                                    \n"
+  "      -v,  --verbose                                                \n"
+  "           verbose mode (more information),                         \n"
+  "                                                                    \n"
+  "      -f,  --fasta                                                  \n"
+  "           outputs a FASTA format with the sequence,                \n"
+  "                                                                    \n"
+  "      -i [INT],  --init [INT]                                       \n"
+  "           initial position for extracting the sequence,            \n"
+  "                                                                    \n"
+  "      -e [INT],  --end [INT]                                        \n"
+  "           end position for extracting the sequence,                \n"
+  "                                                                    \n"
+  "      [FILE]                                                        \n"
+  "           input sequence filename (to analyze) -- MANDATORY,       \n"
+  "           FASTA file for the extraction (last argument).           \n"
+  "                                                                    \n"
+  "SYNOPSIS                                                            \n"
+  "      %s %s [OPTION]... [FILE]                         \n"
+  "                                                                    \n"
+  "EXAMPLE                                                             \n"
+  "      %s %s -v -f -i 101 -e 301 seq.fa\n"
+  "                                                                    \n",
+  PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key);
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 void PrintMenuLR(void){
   fprintf(stderr,
   "NAME                                                                \n"

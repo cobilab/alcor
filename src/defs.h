@@ -56,13 +56,6 @@ typedef int8_t   I8;
 #define TARGET                 0
 #define REFERENCE              1
 
-#define DEF_MA_HELP            0
-#define DEF_MA_WINDOW          47
-#define DEF_MA_COLUMN          1
-#define DEF_MA_VERBOSE         0
-#define DEF_MA_IGNORE          0
-#define DEF_MA_POSITION        0
-
 #define DEF_LR_HELP            0
 #define DEF_LR_FORCE           0
 #define DEF_LR_VERBOSE         0
@@ -82,6 +75,12 @@ typedef int8_t   I8;
 #define DEF_SI_VERBOSE         0
 #define DEF_SI_ALPHABET        "ACGT"
 #define DEF_SI_DNA             1
+
+#define DEF_EX_HELP            0
+#define DEF_EX_VERBOSE         0
+#define DEF_EX_FASTA           0
+#define DEF_EX_INIT            1
+#define DEF_EX_END             1
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

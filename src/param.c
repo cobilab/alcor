@@ -536,3 +536,17 @@ void PrintParametersSI(SI_PARAMETERS *M)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+void PrintParametersEX(EX_PARAMETERS *M)
+  {
+  uint32_t n;
+
+  fprintf(stderr, "[>] FASTA output ................... %s\n", M->fasta == 0 ?
+  "no" : "yes");
+  fprintf(stderr, "[>] Initial position ............... %"PRIu64"\n", M->init);
+  fprintf(stderr, "[>] End position ................... %"PRIu64"\n", M->end);
+
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+

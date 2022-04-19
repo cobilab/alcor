@@ -90,6 +90,7 @@ typedef struct
   U8        force;
   U8        level;
   U8        dna;
+  U8        nosize;
   double    threshold;
   double    weight;
   U32       region;

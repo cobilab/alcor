@@ -583,7 +583,7 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   uint64_t initPos = 0;
   uint64_t curr_pos = 0;
 
-  fprintf(stdout, "#Length\t%"PRIu64"\n", nValues);
+  if(!P->nosize) fprintf(stdout, "#Length\t%"PRIu64"\n", nValues);
   
   while(Fgets_backwards(line_RL, 1024, IN_RL) != NULL)
     { 

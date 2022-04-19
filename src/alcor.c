@@ -97,6 +97,7 @@ void P_LocalRedundancy(char **p, int c)
   MAP->help      = ArgsState  (DEF_LR_HELP,      p, c, "-h", "--help");
   MAP->verbose   = ArgsState  (DEF_LR_VERBOSE,   p, c, "-v", "--verbose");
   MAP->dna       = ArgsState  (DEF_LR_DNA,       p, c, "-d", "--dna");
+  MAP->nosize    = ArgsState  (DEF_LR_NOSIZE,    p, c, "-n", "--no-size");
   MAP->threshold = ArgsDouble (DEF_LR_THRESHOLD, p, c, "-t", "--threshold");
   MAP->weight    = ArgsDouble (DEF_LR_WEIGHT,    p, c, "-w", "--weight");
   MAP->ignore    = ArgsNum    (DEF_LR_IGNORE,    p, c, "-i", "--ignore",
@@ -151,7 +152,8 @@ void P_LocalRedundancy(char **p, int c)
   for(n = 1 ; n < c ; ++n)
     if(strcmp(p[n], "-m") == 0)
       MAP->model[k++] = ArgsUniqModelLR(p[n+1], 0);
-  if(MAP->level != 0){
+  if(MAP->level != 0)
+    {
     for(n = 1 ; n < xargc ; ++n)
       if(strcmp(xargv[n], "-m") == 0)
         MAP->model[k++] = ArgsUniqModelLR(xargv[n+1], 0);
@@ -191,10 +193,10 @@ int32_t main(int argc, char *argv[])
   switch(KeyString(argv[1]))
     {
     case K1: PrintMenu();                                   break;
-    //case K2: P_FilterCharacteristics         (argv, argc);  break;
+    //case K2: P_Extract                       (argv, argc);  break;
     case K3: P_LocalRedundancy               (argv, argc);  break;
     case K4: P_Simulation                    (argv, argc);  break;
-    //case K5: P_MapRaws                       (argv, argc);  break;
+    //case K5: P_Visualization                 (argv, argc);  break;
 
     default:
     PrintWarning("unknown menu option!");

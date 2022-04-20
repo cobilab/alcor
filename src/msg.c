@@ -128,6 +128,59 @@ void PrintModels(void){
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+void PrintMenuVi(void){
+  fprintf(stderr,
+  "NAME                                                                \n"
+  "      %s %s                                        \n"
+  "                                                                    \n"
+  "DESCRIPTION                                                         \n"
+  "      Creates an SVG map with the identified regions.               \n"
+  "                                                                    \n"
+  "PARAMETERS                                                          \n"
+  "                                                                    \n"
+  "      -h,  --help                                                   \n"
+  "           usage guide (help menu),                                 \n"
+  "                                                                    \n"
+  "      -v,  --verbose                                                \n"
+  "           verbose mode (more information),                         \n"
+  "                                                                    \n"
+  "      -w [INT],  --width [INT]                                      \n"
+  "           horizontal width (thickness) of each bar,                \n"
+  "                                                                    \n"
+  "      -s [INT],  --space [INT]                                      \n"
+  "           space between each bar,                                  \n"
+  "                                                                    \n"
+  "      -e [INT],  --enlarge [INT]                                    \n"
+  "           enlargement of each region (increase visibility),        \n"
+  "                                                                    \n"
+  "      -c,  --strict-corner                                          \n"
+  "           it paints each bar with strict corners (NO round),       \n"
+  "                                                                    \n"
+  "      -b [STRING],  --back-color [STRING]                           \n"
+  "           background color in RGB format (example: FFFFFF),        \n"
+  "                                                                    \n"
+  "      -a [STRING],  --border-color [STRING]                         \n"
+  "           bar border color in RGB format (example: 000000),        \n"
+  "                                                                    \n"
+  "      -o [FILE],  --output [FILE]                                   \n"
+  "           filename of the SVG output map,                          \n"
+  "                                                                    \n"
+  "      [FILE]:[FILE]:...                                             \n"
+  "           input position filenames (to analyze) -- MANDATORY,      \n"
+  "           multiple files can be used with : split token.           \n"
+  "                                                                    \n"
+  "SYNOPSIS                                                            \n"
+  "      %s %s [OPTION]... [FILE]:...                   \n"
+  "                                                                    \n"
+  "EXAMPLE                                                             \n"
+  "      %s %s -v -f -o map.svg pos1.txt:pos2.txt:pos3.txt \n"
+  "                                                                    \n",
+  PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key);
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 void PrintMenuEx(void){
   fprintf(stderr,
   "NAME                                                                \n"
@@ -163,7 +216,7 @@ void PrintMenuEx(void){
   "EXAMPLE                                                             \n"
   "      %s %s -v -f -i 101 -e 301 seq.fa\n"
   "                                                                    \n",
-  PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key);
+  PNAME, LT_KEYS[1].key, PNAME, LT_KEYS[1].key, PNAME, LT_KEYS[1].key);
   return;
   }
 
@@ -197,7 +250,8 @@ void PrintMenuLR(void){
   "           threshold to segment regions (real),                     \n"
   "                                                                    \n"
   "      -w [INT],  --window [INT]                                     \n"
-  "           window size to smooth with low-pass filter (int),        \n"
+  "           window size to smooth the minimum of both directions     \n"
+  "           of compression using a moving average filter (int),      \n"
   "                                                                    \n"
   "      -i [INT],  --ignore [INT]                                     \n"
   "           ignore lengths of segmented regions below this value,    \n"
@@ -221,7 +275,7 @@ void PrintMenuLR(void){
   "      %s %s [OPTION]... [FILE]                         \n"
   "                                                                    \n"
   "EXAMPLE                                                             \n"
-  "      %s %s -v -w 0.03 -m 11:50:0:1:0:0.9/0:0:0 seq.fa \n"
+  "      %s %s -v -w 50 -m 11:50:0:1:0:0.9/0:0:0 seq.fa \n"
   "                                                                    \n",
   PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key);
   return;

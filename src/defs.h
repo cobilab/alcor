@@ -82,6 +82,16 @@ typedef int8_t   I8;
 #define DEF_EX_INIT            1
 #define DEF_EX_END             1
 
+#define DEF_VI_HELP            0
+#define DEF_VI_VERBOSE         0
+#define DEF_VI_SPACE           8
+#define DEF_VI_WIDTH           20
+#define DEF_VI_ENLARGE         0
+#define DEF_VI_CORNER          0
+#define DEF_VI_BACKCOLOR       "#FFFFFF"
+#define DEF_VI_BORDERCOLOR     "#000000"
+#define DEF_VI_COLOR           "#343434"
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #endif

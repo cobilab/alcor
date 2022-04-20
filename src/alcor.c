@@ -18,10 +18,51 @@
 #include "lr.h"
 #include "si.h"
 #include "ex.h"
+#include "vi.h"
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 LR_PARAMETERS  *MAP;
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void P_Visual(char **p, int c)
+  {
+  int n;
+
+  VI_PARAMETERS *MAP = (VI_PARAMETERS *) Calloc(1, sizeof(VI_PARAMETERS));
+
+  MAP->help      = ArgsState  (DEF_VI_HELP,    p, c, "-h", "--help");
+  MAP->verbose   = ArgsState  (DEF_VI_VERBOSE, p, c, "-v", "--verbose");
+  MAP->corner    = ArgsState  (DEF_VI_CORNER,  p, c, "-c", "--strict-corner");
+  MAP->space     = ArgsNum    (DEF_VI_SPACE,   p, c, "-s", "--space",
+                              1, 99999);
+  MAP->width     = ArgsNum    (DEF_VI_WIDTH,   p, c, "-w", "--width",
+                              1, 99999);
+  MAP->enlarge   = ArgsNum    (DEF_VI_ENLARGE, p, c, "-e", "--enlarge",
+                              0, 9999999);
+
+  MAP->backColor = "#FFFFFF";
+  MAP->output = "out.svg";
+
+  if(c < MIN_NPARAM_FOR_PROGS+1 || MAP->help)
+    {
+    PrintMenuVi();
+    return;
+    }
+
+
+  MAP->tar = ReadFNames(MAP, p[c-1]);
+
+  if(MAP->verbose) PrintParametersVI(MAP);
+
+  Visual(MAP);
+
+  if(MAP->verbose) fprintf(stderr, "[>] Done!\n");
+
+  free(MAP);
+  return;
+  }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -240,7 +281,7 @@ int32_t main(int argc, char *argv[])
     case K2: P_Extract                       (argv, argc);  break;
     case K3: P_LocalRedundancy               (argv, argc);  break;
     case K4: P_Simulation                    (argv, argc);  break;
-    //case K5: P_Visualization                 (argv, argc);  break;
+    case K5: P_Visual                        (argv, argc);  break;
 
     default:
     PrintWarning("unknown menu option!");

@@ -100,7 +100,8 @@ char *GetRgbColor(uint8_t hue)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Painter *CreatePainter(double size, char *color)
+Painter *CreatePainter(double size, char *color, double width, double space, 
+double enlarge)
   {
   Painter *P    = (Painter *) Malloc(sizeof(Painter));  
 
@@ -110,7 +111,9 @@ Painter *CreatePainter(double size, char *color)
   P->cy         = DEFAULT_CY;
   P->tx         = DEFAULT_TX;
   P->ty         = DEFAULT_TY;
-  P->width      = DEFAULT_WIDTH; 
+  P->width      = width; 
+  P->space      = space; 
+  P->enlarge    = enlarge; 
 
   return P;
   }
@@ -185,42 +188,56 @@ void RectIR(FILE *F, double w, double h, double x, double y, char *color)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-void Chromosome(FILE *F, double w, double h, double x, double y)
+void Chromosome(FILE *F, double w, double h, double x, double y, int corner)
   {
   char borderColor[] = "#000000";
 
-/*
-  double wk = w / 2 + 0.5;
-  fprintf(F, "<path "
-         "d=\"m %.2lf,"
-         "%.2lf 0,"
-         "%.2lf c 0, -8.31 6.69, -%.2lf %.2lf, -%.2lf l -%.2lf,0 z m %.2lf,"
-         "0 c 8.31,0 %.2lf,6.69 %.2lf,%.2lf l 0,-%.2lf -%.2lf,0 z\" "
-         "id=\"rect3787\" style=\"fill:#fff;fill-opacity:1;fill-rule:"
-         "nonzero;stroke:none\" />", x-0.5, y-0.5, 
-         wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk);
+  if(corner == 0)
+    {	  
+    double wk = w / 2 + 0.5;
+    fprintf(F, "<path "
+           "d=\"m %.2lf,"
+           "%.2lf 0,"
+           "%.2lf c 0, -8.31 6.69, -%.2lf %.2lf, -%.2lf l -%.2lf,0 z m %.2lf,"
+           "0 c 8.31,0 %.2lf,6.69 %.2lf,%.2lf l 0,-%.2lf -%.2lf,0 z\" "
+           "id=\"rect3787\" style=\"fill:#fff;fill-opacity:1;fill-rule:"
+           "nonzero;stroke:none\" />", x-0.5, y-0.5, 
+           wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk);
 
-  fprintf(F, "<path "
-         "d=\"m %.2lf,"
-         "%.2lf 0,"
-         "-%.2lf c 0,8.31 -6.69, %.2lf -%.2lf, %.2lf l %.2lf,0 z m -%.2lf,"
-         "0 c -8.31,0 -%.2lf,-6.69 -%.2lf,-%.2lf l 0,%.2lf %.2lf,0 z\" "
-         "id=\"rect3787\" style=\"fill:#fff;fill-opacity:1;fill-rule:"
-         "nonzero;stroke:none\" />", x+0.5+w, y+0.5+h, 
-         wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk);
-*/
+    fprintf(F, "<path "
+           "d=\"m %.2lf,"
+           "%.2lf 0,"
+           "-%.2lf c 0,8.31 -6.69, %.2lf -%.2lf, %.2lf l %.2lf,0 z m -%.2lf,"
+           "0 c -8.31,0 -%.2lf,-6.69 -%.2lf,-%.2lf l 0,%.2lf %.2lf,0 z\" "
+           "id=\"rect3787\" style=\"fill:#fff;fill-opacity:1;fill-rule:"
+           "nonzero;stroke:none\" />", x+0.5+w, y+0.5+h, 
+           wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk);
 
-  fprintf(F, "<rect style=\"fill:none;stroke:%s;stroke-width:1;"
-            "stroke-linecap:butt;stroke-linejoin:miter;"
-            "stroke-miterlimit:1;stroke-opacity:1;"
-            "stroke-dasharray:none\" "
-            "id=\"rect2985\" "
-            "width=\"%.2lf\" " 
-            "height=\"%.2lf\" "
-            "x=\"%.2lf\" "
-            "y=\"%.2lf\" "
-            //"ry=\"12.5\" "     // COMMENT THIS FOR STRICT LINES
-          "/>\n", borderColor, w, h, x, y);
+    fprintf(F, "<rect style=\"fill:none;stroke:%s;stroke-width:1;"
+              "stroke-linecap:butt;stroke-linejoin:miter;"
+              "stroke-miterlimit:1;stroke-opacity:1;"
+              "stroke-dasharray:none\" "
+              "id=\"rect2985\" "
+              "width=\"%.2lf\" " 
+              "height=\"%.2lf\" "
+              "x=\"%.2lf\" "
+              "y=\"%.2lf\" "
+              "ry=\"10\" "     // COMMENT THIS FOR STRICT LINES
+              "/>\n", borderColor, w, h, x, y);
+    }
+  else
+    {
+    fprintf(F, "<rect style=\"fill:none;stroke:%s;stroke-width:1;"
+              "stroke-linecap:butt;stroke-linejoin:miter;"
+              "stroke-miterlimit:1;stroke-opacity:1;"
+              "stroke-dasharray:none\" "
+              "id=\"rect2985\" "
+              "width=\"%.2lf\" "
+              "height=\"%.2lf\" "
+              "x=\"%.2lf\" "
+              "y=\"%.2lf\" "
+              "/>\n", borderColor, w, h, x, y);
+    }
   }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

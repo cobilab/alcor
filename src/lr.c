@@ -85,7 +85,7 @@ void CompressTargetDNA(THREADS T)
   while((k = fread(readBUF, 1, DEF_BUF_SIZE, Reader)))
     for(idxPos = 0 ; idxPos < k ; ++idxPos)
       {
-      sym = readBUF[idxPos];
+      sym = toupper(readBUF[idxPos]);
 
       // FINAL FILTERING DNA CONTENT
       if(sym != 'A' && sym != 'C' && sym != 'G' && sym != 'T')
@@ -556,6 +556,8 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
 
   FILE *IN2 = Fopen(".lrcr_1.seq", "r");
   uint64_t nBytes = NBytesInFile(IN2);
+  
+  if(P->verbose) fprintf(stderr, "[>] Number of bytes: %"PRIu64"\n", nBytes);
 
   fseek(IN2, -1L, 2);
   while(nBytes--){
@@ -579,8 +581,6 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   // GET THE MINIMUM OF LR & RL DIRECTIONS, FILTER & SEGMENT ==================
   //
   
-  if(P->verbose) PrintMessage("Filtering and segmenting ...");
-
   FILE *IN_LR = Fopen(".lrcr_1.inf", "r");
   FILE *IN_RL = Fopen(".lrcr_2.inf", "r");
   FILE *P_MIN = Fopen(".lrcr_1_2.inf", "w");
@@ -600,10 +600,10 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
       PrintWarning("information files have been changed!");
       exit(1);
       }
-    double RL = atof(line_RL);
-    double LR = atof(line_LR);
-    double min = RL < LR ? RL : LR;
-    fprintf(P_MIN, "%.5lf\n", min);
+    float RL = atof(line_RL);
+    float LR = atof(line_LR);
+    float min = RL < LR ? RL : LR;
+    fprintf(P_MIN, "%.3g\n", min);
     }
   fclose(P_MIN);
   fclose(IN_RL);
@@ -624,7 +624,7 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   while(fgets(buffer, 1024, MIN_IN))
     {
     newAvg = MovAvgInstant(filt, &sum, idx, P->window, atof(buffer));
-    fprintf(PROF, "%lf\n", newAvg);
+    fprintf(PROF, "%.3g\n", (float) newAvg);
     if(++idx == P->window) idx = 0;
     }
   fclose(MIN_IN);

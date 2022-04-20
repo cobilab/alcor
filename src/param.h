@@ -95,11 +95,21 @@ typedef struct
   {
   U32       help;
   U32       verbose;
-  char      **filenames;
-  U32       nFiles;
+  char      *output;
+  char      *backColor;
+  char      *borderColor;
+  char      *color;
+  SFILES    *tar;
+  uint8_t   disk;
+  uint8_t   corner;
+  U64       *chrSize;
   U64       max;
+  U64       size;
+  U64       space;
+  U64       width;
+  U64       enlarge;
   }
-PA_PARAMETERS;
+VI_PARAMETERS;
 
 typedef struct
   {
@@ -113,7 +123,7 @@ typedef struct
   U8        dna;
   U8        nosize;
   double    threshold;
-  U32        window;
+  U32       window;
   U32       region;
   MODEL_PAR *model;
   U64       size;
@@ -139,9 +149,11 @@ char        *ArgsString        (char    *, char *[], uint32_t, char *, char *);
 char        *ArgsFiles         (char *[], uint32_t, char *);
 MODEL_PAR   ArgsUniqModelLR    (char *, uint8_t);
 MODEL_PAR   ArgsUniqModelSI    (char *, uint8_t);
+SFILES      *ReadFNames        (VI_PARAMETERS *, char *);
 void        PrintParametersLR  (LR_PARAMETERS *);
 void        PrintParametersSI  (SI_PARAMETERS *);
 void        PrintParametersEX  (EX_PARAMETERS *);
+void        PrintParametersVI  (VI_PARAMETERS *);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

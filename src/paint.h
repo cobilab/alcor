@@ -13,13 +13,16 @@
 #define EXTRA                  150                   // EXTRA SPACE FOR BORDER
 #define LEVEL_SATURATION       220 
 #define LEVEL_VALUE            160
-#define LEVEL_HUE              1
+#define LEVEL_HUE              100 //GREEN
+//#define LEVEL_HUE              1   //RED
 #define LEVEL_HUE_N            1                              // N's HUE COLOR
 
 typedef struct
   {
   char    *backColor;
   double  width;
+  double  space;
+  double  enlarge;
   double  cx; 
   double  cy;
   double  tx;
@@ -48,7 +51,7 @@ double scale;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Painter   *CreatePainter (double, char *);
+Painter   *CreatePainter (double, char *, double, double, double);
 RgbColor  HsvToRgb       (HsvColor);
 HsvColor  RgbToHsv       (RgbColor);
 char      *GetRgbColor   (uint8_t);
@@ -58,7 +61,7 @@ void      RectOval       (FILE *, double, double, double, double, char *);
 void      RectOvalIR     (FILE *, double, double, double, double, char *);
 void      Rect           (FILE *, double, double, double, double, char *);
 void      RectIR         (FILE *, double, double, double, double, char *);
-void      Chromosome     (FILE *, double, double, double, double);
+void      Chromosome     (FILE *, double, double, double, double, int);
 void      Text           (FILE *, double, double, char *);
 void      TextFloat      (FILE *, double, double, double);
 void      SetScale       (double);

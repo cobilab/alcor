@@ -172,10 +172,10 @@ uint8_t DNASymToNum(uint8_t symbol)
   {
   switch(symbol)
     {
-    case 'A': return 0;
-    case 'T': return 3;
-    case 'C': return 1;
-    case 'G': return 2;
+    case 'A': case 'a': return 0;
+    case 'T': case 't': return 3;
+    case 'C': case 'c': return 1;
+    case 'G': case 'g': return 2;
     default : return 4;
     }
   return 5;
@@ -203,10 +203,10 @@ uint8_t GetCompSym(uint8_t symbol)
   {
   switch(symbol)
     {
-    case 'A': return 'T';
-    case 'C': return 'G';
-    case 'G': return 'C';
-    case 'T': return 'A';
+    case 'A': case 'a': return 'T';
+    case 'C': case 'c': return 'G';
+    case 'G': case 'g': return 'C';
+    case 'T': case 't': return 'A';
     default:  return symbol;
     }
   return 'X';
@@ -235,10 +235,10 @@ void ComplementArrayStack(uint8_t array[], uint32_t size)
   for(uint32_t x = 0 ; x < size ; ++x)
     switch(array[x])
       {
-      case 'A': array[x] = 'T'; break; 
-      case 'C': array[x] = 'G'; break;
-      case 'G': array[x] = 'C'; break;
-      case 'T': array[x] = 'A'; break;
+      case 'A': case 'a': array[x] = 'T'; break; 
+      case 'C': case 'c': array[x] = 'G'; break;
+      case 'G': case 'g': array[x] = 'C'; break;
+      case 'T': case 't': array[x] = 'A'; break;
       default: break;
       }
   return;

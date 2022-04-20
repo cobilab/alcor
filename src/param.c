@@ -410,6 +410,26 @@ char *ArgsFiles(char *arg[], uint32_t argc, char *str)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+SFILES *ReadFNames(VI_PARAMETERS *P, char *arg)
+  {
+  SFILES *SF = (SFILES *) Calloc(1, sizeof(SFILES));
+  uint32_t nFiles = 1, k = 0, argLen = strlen(arg);
+  for( ; k != argLen ; ++k)
+    if(arg[k] == ':')
+      ++nFiles;
+  SF->names = (char **) Malloc(nFiles * sizeof(char *));
+  SF->names[0] = strtok(arg, ":");
+  TestReadFile(SF->names[0]);
+  for(k = 1 ; k < nFiles ; ++k){
+    SF->names[k] = strtok(NULL, ":");
+    TestReadFile(SF->names[k]);
+    }
+  SF->nFiles = nFiles;
+  return SF;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 void PrintParametersLR(LR_PARAMETERS *M)
   {
   uint32_t n;
@@ -544,6 +564,19 @@ void PrintParametersEX(EX_PARAMETERS *M)
   "no" : "yes");
   fprintf(stderr, "[>] Initial position ............... %"PRIu64"\n", M->init);
   fprintf(stderr, "[>] End position ................... %"PRIu64"\n", M->end);
+
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void PrintParametersVI(VI_PARAMETERS *M)
+  {
+  uint32_t n;
+
+  fprintf(stderr, "[>] Enlarge ........................ %"PRIu64"\n", M->enlarge);
+  fprintf(stderr, "[>] Space .......................... %"PRIu64"\n", M->space);
+  fprintf(stderr, "[>] Width .......................... %"PRIu64"\n", M->width);
 
   return;
   }

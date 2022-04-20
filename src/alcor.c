@@ -42,15 +42,46 @@ void P_Visual(char **p, int c)
   MAP->enlarge   = ArgsNum    (DEF_VI_ENLARGE, p, c, "-e", "--enlarge",
                               0, 9999999);
 
-  MAP->backColor = "#FFFFFF";
-  MAP->output = "out.svg";
-
   if(c < MIN_NPARAM_FOR_PROGS+1 || MAP->help)
     {
     PrintMenuVi();
     return;
     }
 
+  int exists = 0;
+  for(n = 1 ; n < c ; ++n)
+    if(strcmp(p[n], "-b") == 0 || strcmp(p[n], "--back-color") == 0)
+      {
+      MAP->backColor = CloneString(p[n+1]);
+      CheckHexaColor(MAP->backColor);
+      exists = 1;
+      break;
+      }
+  if(exists == 0)
+    MAP->backColor = CloneString("ffffff");
+
+  exists = 0;
+  for(n = 1 ; n < c ; ++n)
+    if(strcmp(p[n], "-a") == 0 || strcmp(p[n], "--border-color") == 0)
+      {
+      MAP->borderColor = CloneString(p[n+1]);
+      CheckHexaColor(MAP->borderColor);
+      exists = 1;
+      break;
+      }
+  if(exists == 0) 
+    MAP->borderColor = CloneString("262626");
+
+  exists = 0;
+  for(n = 1 ; n < c ; ++n)
+    if(strcmp(p[n], "-o") == 0 || strcmp(p[n], "--output") == 0)
+      {
+      MAP->output = CloneString(p[n+1]);
+      exists = 1;
+      break;
+      }
+  if(exists == 0)
+    MAP->output = CloneString("map.svg");
 
   MAP->tar = ReadFNames(MAP, p[c-1]);
 

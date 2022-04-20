@@ -51,6 +51,7 @@ double scale;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+void      CheckHexaColor (char *);
 Painter   *CreatePainter (double, char *, double, double, double);
 RgbColor  HsvToRgb       (HsvColor);
 HsvColor  RgbToHsv       (RgbColor);
@@ -61,7 +62,8 @@ void      RectOval       (FILE *, double, double, double, double, char *);
 void      RectOvalIR     (FILE *, double, double, double, double, char *);
 void      Rect           (FILE *, double, double, double, double, char *);
 void      RectIR         (FILE *, double, double, double, double, char *);
-void      Chromosome     (FILE *, double, double, double, double, int);
+void      Chromosome     (FILE *, double, double, double, double, int, char *,
+		         char *);
 void      Text           (FILE *, double, double, char *);
 void      TextFloat      (FILE *, double, double, double);
 void      SetScale       (double);

@@ -68,7 +68,7 @@ void Visual(VI_PARAMETERS *P)
       }
 
     Chromosome(Plot, Paint->width, GetPoint(P->chrSize[tar]), Paint->cx,
-    Paint->cy, P->corner);
+    Paint->cy, P->corner, P->borderColor, P->backColor);
 
     if(P->tar->nFiles > 0) 
       Paint->cx += Paint->width + Paint->space;

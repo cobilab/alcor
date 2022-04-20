@@ -173,7 +173,7 @@ void PrintMenuVi(void){
   "      %s %s [OPTION]... [FILE]:...                   \n"
   "                                                                    \n"
   "EXAMPLE                                                             \n"
-  "      %s %s -v -f -o map.svg pos1.txt:pos2.txt:pos3.txt \n"
+  "      %s %s -v -o map.svg pos1.txt:pos2.txt:pos3.txt \n"
   "                                                                    \n",
   PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key);
   return;

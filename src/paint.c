@@ -6,6 +6,29 @@
 #include "paint.h"
 #include "common.h"
 #include "mem.h"
+#include "msg.h"
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void CheckHexaColor(char  *s)
+  {
+  int x, state = 0;
+
+  if(!(strlen(s) == 3 || strlen(s) == 6)) state = 1;
+  for(x = 1; x < strlen(s) ; ++x)
+    if(!((s[x] >= '0' && s[x] <= 9) || (s[x] >= 'a' && s[x] <= 'f')
+    || (s[x] >= 'A' || s[x] <= 'F')))
+      state = 1;
+
+  if(state == 1)
+    {
+    PrintWarning("Invalid Hexadecimal color!");
+    exit(1);
+    }
+
+  return;
+  }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -93,7 +116,7 @@ char *GetRgbColor(uint8_t hue)
 
   RGB = HsvToRgb(HSV);
 
-  sprintf(color, "#%X%X%X", RGB.r, RGB.g, RGB.b); 
+  sprintf(color, "%X%X%X", RGB.r, RGB.g, RGB.b); 
 
   return color;
   }
@@ -123,7 +146,7 @@ double enlarge)
 void RectOval(FILE *F, double w, double h, double x, double y, char *color)
   {
   fprintf(F, "<rect "
-              "style=\"fill:%s;fill-opacity:1;stroke-width:2;"
+              "style=\"fill:#%s;fill-opacity:1;stroke-width:2;"
               "stroke-miterlimit:4;stroke-dasharray:none\" "
               "id=\"rectx\" "
               "width=\"%.2lf\" " 
@@ -157,7 +180,7 @@ void RectOvalIR(FILE *F, double w, double h, double x, double y, char *color)
 
 void Rect(FILE *F, double w, double h, double x, double y, char *color)
   {
-  fprintf(F, "<rect style=\"fill:%s;fill-opacity:1;stroke-width:2;"
+  fprintf(F, "<rect style=\"fill:#%s;fill-opacity:1;stroke-width:2;"
               "stroke-miterlimit:4;stroke-dasharray:none\" "
               "id=\"rect3777\" "
               "width=\"%.2lf\" " 
@@ -188,10 +211,9 @@ void RectIR(FILE *F, double w, double h, double x, double y, char *color)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-void Chromosome(FILE *F, double w, double h, double x, double y, int corner)
+void Chromosome(FILE *F, double w, double h, double x, double y, int corner, 
+char *borderColor, char *backColor)
   {
-  char borderColor[] = "#000000";
-
   if(corner == 0)
     {	  
     double wk = w / 2 + 0.5;
@@ -200,20 +222,20 @@ void Chromosome(FILE *F, double w, double h, double x, double y, int corner)
            "%.2lf 0,"
            "%.2lf c 0, -8.31 6.69, -%.2lf %.2lf, -%.2lf l -%.2lf,0 z m %.2lf,"
            "0 c 8.31,0 %.2lf,6.69 %.2lf,%.2lf l 0,-%.2lf -%.2lf,0 z\" "
-           "id=\"rect3787\" style=\"fill:#fff;fill-opacity:1;fill-rule:"
+           "id=\"rect3787\" style=\"fill:#%s;fill-opacity:1;fill-rule:"
            "nonzero;stroke:none\" />", x-0.5, y-0.5, 
-           wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk);
+           wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, backColor);
 
     fprintf(F, "<path "
            "d=\"m %.2lf,"
            "%.2lf 0,"
            "-%.2lf c 0,8.31 -6.69, %.2lf -%.2lf, %.2lf l %.2lf,0 z m -%.2lf,"
            "0 c -8.31,0 -%.2lf,-6.69 -%.2lf,-%.2lf l 0,%.2lf %.2lf,0 z\" "
-           "id=\"rect3787\" style=\"fill:#fff;fill-opacity:1;fill-rule:"
+           "id=\"rect3787\" style=\"fill:#%s;fill-opacity:1;fill-rule:"
            "nonzero;stroke:none\" />", x+0.5+w, y+0.5+h, 
-           wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk);
+           wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, wk, backColor);
 
-    fprintf(F, "<rect style=\"fill:none;stroke:%s;stroke-width:1;"
+    fprintf(F, "<rect style=\"fill:none;stroke:#%s;stroke-width:1;"
               "stroke-linecap:butt;stroke-linejoin:miter;"
               "stroke-miterlimit:1;stroke-opacity:1;"
               "stroke-dasharray:none\" "
@@ -227,7 +249,7 @@ void Chromosome(FILE *F, double w, double h, double x, double y, int corner)
     }
   else
     {
-    fprintf(F, "<rect style=\"fill:none;stroke:%s;stroke-width:1;"
+    fprintf(F, "<rect style=\"fill:none;stroke:#%s;stroke-width:1;"
               "stroke-linecap:butt;stroke-linejoin:miter;"
               "stroke-miterlimit:1;stroke-opacity:1;"
               "stroke-dasharray:none\" "

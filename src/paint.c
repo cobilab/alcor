@@ -244,7 +244,7 @@ char *borderColor, char *backColor)
               "height=\"%.2lf\" "
               "x=\"%.2lf\" "
               "y=\"%.2lf\" "
-              "ry=\"10\" "     // COMMENT THIS FOR STRICT LINES
+              "ry=\"9\" "     // COMMENT THIS FOR STRICT LINES
               "/>\n", borderColor, w, h, x, y);
     }
   else

@@ -14,7 +14,6 @@
 #define LEVEL_SATURATION       220 
 #define LEVEL_VALUE            160
 #define LEVEL_HUE              100 //GREEN
-//#define LEVEL_HUE              1   //RED
 #define LEVEL_HUE_N            1                              // N's HUE COLOR
 
 typedef struct

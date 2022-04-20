@@ -25,7 +25,7 @@ void Visual(VI_PARAMETERS *P)
   FILE *Plot = Fopen(P->output, "w");
   uint64_t init, end;
   Painter *Paint;
-  uint32_t tar;
+  uint32_t tar, cl;
 
   P->chrSize = (uint64_t *) Calloc(P->tar->nFiles, sizeof(uint64_t));
 
@@ -61,10 +61,11 @@ void Visual(VI_PARAMETERS *P)
 
     P->chrSize[tar] = x_size;
 
-    while(fscanf(Reader, "%"PRIu64"\t%"PRIu64"", &init, &end) == 2)
+    while(fscanf(Reader, "%"PRIu64"\t%"PRIu64"\t%u", &init, &end, &cl) == 3)
       {
+      assert(cl >= 0 && cl <= 255);
       Rect(Plot, Paint->width, GetPoint(end-init+1+Paint->enlarge), Paint->cx,
-      Paint->cy + GetPoint(init), GetRgbColor(LEVEL_HUE));
+      Paint->cy + GetPoint(init), GetRgbColor(cl));
       }
 
     Chromosome(Plot, Paint->width, GetPoint(P->chrSize[tar]), Paint->cx,

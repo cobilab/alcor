@@ -575,7 +575,12 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   // 
  
   if(P->verbose) PrintMessage("Compressing streams ...");
+  
   CompressAction(T);
+  
+  remove(".lrcr_1.seq");
+  remove(".lrcr_2.seq");
+
   if(P->verbose) PrintMessage("Done!");
 
   // GET THE MINIMUM OF LR & RL DIRECTIONS, FILTER & SEGMENT ==================
@@ -658,7 +663,7 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
         {              
         region = 1; 
         if(idx - initPos > P->ignore)	
-          fprintf(stdout, "%"PRIu64"\t%"PRIu64"\n", initPos, idx);
+          fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", initPos, idx, P->color);
         }
       }
     else // val < threshold ====> LOW_REGION
@@ -674,10 +679,12 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   if(region == 0)
     {
     if(idx - initPos > P->ignore)	  
-    fprintf(stdout, "%"PRIu64"\t%"PRIu64"\n", initPos, idx);
+    fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", initPos, idx, P->color);
     }
 
   fclose(PROF_IN);
+  
+  if(P->hide) remove(Cat(P->filename, ".info"));
 
   return;
   }

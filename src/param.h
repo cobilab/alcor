@@ -121,8 +121,10 @@ typedef struct
   U8        force;
   U8        level;
   U8        dna;
+  U8        hide;
   U8        nosize;
   double    threshold;
+  U32       color;
   U32       window;
   U32       region;
   MODEL_PAR *model;

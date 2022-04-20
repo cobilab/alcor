@@ -211,9 +211,12 @@ void P_LocalRedundancy(char **p, int c)
 
   MAP->help      = ArgsState  (DEF_LR_HELP,      p, c, "-h", "--help");
   MAP->verbose   = ArgsState  (DEF_LR_VERBOSE,   p, c, "-v", "--verbose");
+  MAP->hide      = ArgsState  (DEF_LR_HIDE,      p, c, "-e", "--hide");
   MAP->dna       = ArgsState  (DEF_LR_DNA,       p, c, "-d", "--dna");
   MAP->nosize    = ArgsState  (DEF_LR_NOSIZE,    p, c, "-n", "--no-size");
   MAP->threshold = ArgsDouble (DEF_LR_THRESHOLD, p, c, "-t", "--threshold");
+  MAP->color     = ArgsNum    (DEF_LR_COLOR,     p, c, "-c", "--color",
+                              0, 255);
   MAP->window    = ArgsNum    (DEF_LR_WINDOW,    p, c, "-w", "--window",
                               0, 999999999);
   MAP->ignore    = ArgsNum    (DEF_LR_IGNORE,    p, c, "-i", "--ignore",

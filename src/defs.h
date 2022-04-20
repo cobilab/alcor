@@ -69,6 +69,8 @@ typedef int8_t   I8;
 #define DEF_LR_MIN_LEVEL       1
 #define DEF_LR_MAX_LEVEL       15
 #define DEF_LR_LEVEL           11
+#define DEF_LR_COLOR           100
+#define DEF_LR_HIDE            0
 
 #define DEF_SI_HELP            0
 #define DEF_SI_FORCE           0

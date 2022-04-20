@@ -84,6 +84,8 @@ void P_Visual(char **p, int c)
     MAP->output = CloneString("map.svg");
 
   MAP->tar = ReadFNames(MAP, p[c-1]);
+  
+  if(MAP->verbose) PrintMessage("Running visual ...");
 
   if(MAP->verbose) PrintParametersVI(MAP);
 

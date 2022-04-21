@@ -37,7 +37,6 @@ void CompressTargetDNA(THREADS T)
   sprintf(out_name, ".lrcr_%u.inf", T.id + 1);
   FILE        *Reader  = Fopen(in_name,  "r");
   FILE        *Writter = Fopen(out_name, "w");
-
   uint32_t    n, k, cModel, totModels, idxPos;
   uint64_t    compressed = 0, nSymbols = 0, nBases = 0, i = 0;
   uint8_t     *readBUF, sym, irSym, *pos;
@@ -81,6 +80,7 @@ void CompressTargetDNA(THREADS T)
       WM->gamma[pIdx++] = cModels[n]->eGamma;
     }
 
+  float dv = 2.0; 
   compressed = 0;
   while((k = fread(readBUF, 1, DEF_BUF_SIZE, Reader)))
     for(idxPos = 0 ; idxPos < k ; ++idxPos)
@@ -91,6 +91,7 @@ void CompressTargetDNA(THREADS T)
       if(sym != 'A' && sym != 'C' && sym != 'G' && sym != 'T')
         {
         fprintf(Writter, "%lf\n", 2.0);  // FORCE HIGH COMPLEXITY
+        //fwrite(&dv, sizeof(float), 1, Writter);
         continue;
         }
 
@@ -122,6 +123,7 @@ void CompressTargetDNA(THREADS T)
 
       bits += (bps = PModelNats(MX, sym) / M_LN2);
       fprintf(Writter, "%.3g\n", bps);
+      //fwrite(&bps, sizeof(float), 1, Writter);
       CalcDecayment(WM, PM, sym);
 
       // ADD COUNTERS
@@ -553,6 +555,8 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
     }
   fclose(IN);
   fclose(OUT1);
+
+  fprintf(stderr, "ddddd\n");
 
   FILE *IN2 = Fopen(".lrcr_1.seq", "r");
   uint64_t nBytes = NBytesInFile(IN2);

@@ -556,8 +556,6 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   fclose(IN);
   fclose(OUT1);
 
-  fprintf(stderr, "ddddd\n");
-
   FILE *IN2 = Fopen(".lrcr_1.seq", "r");
   uint64_t nBytes = NBytesInFile(IN2);
   

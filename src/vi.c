@@ -30,15 +30,20 @@ void Visual(VI_PARAMETERS *P)
   P->chrSize = (uint64_t *) Calloc(P->tar->nFiles, sizeof(uint64_t));
 
   // SET MAXIMUM FROM FILE:
-  FILE *XReader = Fopen(P->tar->names[0], "r");
+  P->max = 0;
   uint64_t x_size = 0;
-  if(fscanf(XReader, "#Length %"PRIu64"", &x_size) != 1)
+  for(tar = 0 ; tar < P->tar->nFiles ; ++tar)
     {
-    fprintf(stderr, "Error: unknown segmented file!\n");
-    exit(1);
+    FILE *XReader = Fopen(P->tar->names[tar], "r");
+    if(fscanf(XReader, "#Length %"PRIu64"", &x_size) != 1)
+      {
+      fprintf(stderr, "Error: unknown segmented file!\n");
+      exit(1);
+      }
+
+    if(P->max < x_size) P->max = x_size;
+    fclose(XReader);
     }
-  P->max = x_size;
-  fclose(XReader);
 
   SetScale(P->max);
   Paint = CreatePainter(GetPoint(P->max), P->backColor, P->width, P->space, 

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-WINDOW=" 10 ";
+WINDOW=" 20 ";
 #
 PROJECT (){
   mapfile -t DATA < $1

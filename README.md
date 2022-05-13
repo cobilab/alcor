@@ -42,7 +42,7 @@ AlcoR simulation -rs 2000:0:1:0:0:0 -rs 2000:0:11:0:0:0 -rs 2000:0:1:0:0:0 -rs 2
 
 Run AlcoR redundancy mapper:
 <pre>
-AlcoR redundancy -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 1.0 -t 0.5 sample.fasta
+AlcoR redundancy -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 3 -t 0.5 sample.fasta
 </pre>
 
 ## PARAMETERS

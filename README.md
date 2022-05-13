@@ -56,9 +56,12 @@ or
 AlcoR -h
 </pre>
 
-If you are not interested in setting the template for each model, then use the levels mode. To see the possible levels type:
+If you are not interested in viewing each sub-program option, type 
 <pre>
-AlcoR redundancy -s
+AlcoR extract -h
+AlcoR redundancy -h
+AlcoR simulation -h
+AlcoR visual -h
 </pre>
 
 ## CITATION ##

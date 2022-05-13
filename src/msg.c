@@ -35,7 +35,7 @@ void PrintMenu(void)
   {
   fprintf(stderr,
   "                                                        \n"
-  "Program: %s [Alignment-free Computation of Redundant regions]\n" 
+  "Program: %s [Alignment-free Computation of Redundant Regions]\n" 
   "Version: %u.%u                                          \n"
   "                                                        \n"
   "Usage: %s <command> [options]                           \n"

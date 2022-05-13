@@ -11,5 +11,5 @@ for GENOME in "${GENOMES[@]}"
   cat $GENOME-d.txt $GENOME-l.txt > $GENOME.txt;
   done
 #
-./AlcoR visual -o mapv.svg --strict-corner -s 46 -w 10 -e 0 --border-color cccccc HSV-1.txt:HSV-2.txt:VZV.txt:EBV.txt:HCMV.txt:HHV6A.txt:HHV6B.txt:HHV7.txt:KSHV.txt
+./AlcoR visual -o mapv.svg --strict-corner -s 10 -w 10 -e 0 --border-color cccccc HSV-1.txt:HSV-2.txt:VZV.txt:EBV.txt:HCMV.txt:HHV6A.txt:HHV6B.txt:HHV7.txt:KSHV.txt
 #

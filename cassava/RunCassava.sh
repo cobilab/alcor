@@ -4,10 +4,10 @@ THRESHOLD=" 0.6 ";
 #
 for((x=1;x<=18;++x));
   do
-  ./AlcoR redundancy -v --hide --color 100 --threshold $THRESHOLD --ignore 5000 --dna -w 5000 -m 13:50:0:1:10:0.9/3:10:0.9 h1_chr$x.fa > h1-c-d-$x.txt
-  ./AlcoR redundancy -v --hide --color 100 --threshold $THRESHOLD --ignore 5000 --dna -w 5000 -m 13:50:0:1:10:0.9/3:10:0.9 h2_chr$x.fa > h2-c-d-$x.txt
-  ./AlcoR redundancy -v --no-size --hide --threshold $THRESHOLD --color 1 --ignore 5000 --dna -w 5000 -m 13:50:5000:1:10:0.9/3:10:0.9 h1_chr$x.fa > h1-c-l-$x.txt
-  ./AlcoR redundancy -v --no-size --hide --threshold $THRESHOLD --color 1 --ignore 5000 --dna -w 5000 -m 13:50:5000:1:10:0.9/3:10:0.9 h2_chr$x.fa > h2-c-l-$x.txt
+  ./AlcoR redundancy -v --hide --color 100 --threshold $THRESHOLD --ignore 5000 --dna -w 5000 -m 13:50:0:1:10:0.9/3:10:0.9 H1_C$x.fa > h1-c-d-$x.txt
+  ./AlcoR redundancy -v --hide --color 100 --threshold $THRESHOLD --ignore 5000 --dna -w 5000 -m 13:50:0:1:10:0.9/3:10:0.9 H2_C$x.fa > h2-c-d-$x.txt
+  ./AlcoR redundancy -v --no-size --hide --threshold $THRESHOLD --color 1 --ignore 5000 --dna -w 5000 -m 13:50:5000:1:10:0.9/3:10:0.9 H1_C$x.fa > h1-c-l-$x.txt
+  ./AlcoR redundancy -v --no-size --hide --threshold $THRESHOLD --color 1 --ignore 5000 --dna -w 5000 -m 13:50:5000:1:10:0.9/3:10:0.9 H2_C$x.fa > h2-c-l-$x.txt
   done
 #
 for((x=1;x<=18;++x));

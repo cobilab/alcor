@@ -1,4 +1,4 @@
 #!/bin/bash
 #
-gunzip *.gz
+gunzip -k *.gz
 #

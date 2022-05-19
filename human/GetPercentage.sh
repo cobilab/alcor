@@ -26,5 +26,6 @@ while IFS= read -r line
 done < "$input"
 #
 PROPORTION=`echo "scale=3;$SUM_PART / $TOTAL * 100; " | bc -l`;
-echo "Redudant parts: $PROPORTION % [ $SUM_PART (of $TOTAL )]" ;
+printf "Redudant parts: %s perc. [ %s (of %s )]" "$PROPORTION" "$SUM_PART" "$TOTAL";
+#
 

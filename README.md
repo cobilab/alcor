@@ -3,13 +3,13 @@
 
 <p align="center"><img src="imgs/logo.png" 
 alt="AlcoR" width="250" border="0" /></p>
-<b>Alignment-free computation and visualization of local and distant redundant regions in FASTA data</b>. This method provides the ability of fast sequence characterization through redundancy, ideally for scenarios entangling the presence of new or unknown sequences. AlcoR is implemented in C language using multi-threading to increase the computational speed, is flexible for multiple applications, and does not contain external dependencies. The tool accepts any sequence in FASTA format.
+<b>Alignment-free simulation, computation, and visualization of local and distant low-complexity regions in FASTA data</b>. This method provides the ability of fast sequence characterization through low-complexity regions, ideally for scenarios entangling the presence of new or unknown sequences. AlcoR is implemented in C language using multi-threading to increase the computational speed, is flexible for multiple applications, and does not contain external dependencies. The tool accepts any sequence in FASTA format.
 The AlcoR tool contains one main menu (command: AlcoR) with the four sub menus for computing the features that it provides, namely
 <ul>
 <li><b>extract</b>: extracts a sequence of a FASTA file using positional coordinates (independent from the existing headers of the FASTA files);</li>
-<li><b>redundancy</b>: computes the redundancy of a FASTA read while providing bidirectional complexity profiles and further structural similarity analysis;</li>
+<li><b>redundancy</b>: computes the low-complexity regions of a FASTA read while providing bidirectional complexity profiles and further structural similarity analysis;</li>
 <li><b>simulation</b>: FASTA sequence simulation with features: file extraction, random generation, sequence modeling (with SNPs specific mutations);</li>
-<li><b>visual</b>: computes an SVG file with the respective map containing the redundant regions.</li>
+<li><b>visual</b>: computes an SVG file with the respective map containing the low-complexity regions.</li>
 </ul>
 
 ## INSTALLATION ##
@@ -40,7 +40,7 @@ Run AlcoR FASTA simulation tool:
 AlcoR simulation -rs 2000:0:1:0:0:0 -rs 2000:0:11:0:0:0 -rs 2000:0:1:0:0:0 -rs 2000:0:71:0:0:0 > sample.fasta;
 </pre>
 
-Run AlcoR redundancy mapper:
+Run AlcoR low-complexity (redundancy) mapper:
 <pre>
 AlcoR redundancy -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 3 -t 0.5 sample.fasta
 </pre>
@@ -80,6 +80,4 @@ GPL v3.
 
 For more information:
 <pre>http://www.gnu.org/licenses/gpl-3.0.html</pre>
-
-                                                    
 

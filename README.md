@@ -2,8 +2,11 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
 <p align="center"><img src="imgs/logo_trans.png" alt="AlcoR" width="250" border="0" /></p>
+<p align="center">
 <b>Alignment-free simulation, mapping, and visualization of low-complexity regions in FASTA data</b>. 
+</p>
 
+<p align="justify">
 This method provides the ability of fast sequence characterization through low-complexity regions, ideally for scenarios entangling the presence of new or unknown sequences. AlcoR offers important analysis advantages, such as the high-sensitivity, speed, and does not provide false positives, ideally to be applied in the current Telomere-to-telomere (T2T) sequencing and assembly methodologies. AlcoR is implemented in C language using multi-threading to increase the computational speed, is flexible for multiple applications, and does not contain external dependencies. The tool accepts any sequence in FASTA format.
 
 The AlcoR tool contains one main menu (command: AlcoR) with the four sub menus for computing the features that it provides, namely
@@ -13,6 +16,7 @@ The AlcoR tool contains one main menu (command: AlcoR) with the four sub menus f
 <li><b>simulation</b>: FASTA sequence simulation with features: file extraction, random generation, sequence modeling (with SNPs specific mutations);</li>
 <li><b>visual</b>: computes an SVG file with the respective map containing the low-complexity regions.</li>
 </ul>
+</p>
 
 ## INSTALLATION ##
 

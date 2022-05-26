@@ -281,7 +281,7 @@ void PrintMenuLR(void){
   "      %s %s [OPTION]... [FILE]                         \n"
   "                                                                    \n"
   "EXAMPLE                                                             \n"
-  "      %s %s -v -w 50 -m 11:50:0:1:0:0.9/0:0:0 seq.fa \n"
+  "      %s %s -v -w 50 -m 13:50:0:1:10:0.9/5:10:0.9 seq.fa \n"
   "                                                                    \n",
   PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key);
   return;

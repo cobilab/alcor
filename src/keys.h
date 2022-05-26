@@ -24,7 +24,7 @@ static K_STRUCT LT_KEYS[] =
   { 
     { "help"          , K1  },  // HELP MENU
     { "extract"       , K2  },  // EXTRACTION
-    { "redundancy"    , K3  },  // REDUNDANCY
+    { "mapper"        , K3  },  // LOW-COMPLEXITY MAPPER
     { "simulation"    , K4  },  // SIMULATION
     { "visual"        , K5  }   // VISUALIZATION 
   };

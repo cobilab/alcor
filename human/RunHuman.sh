@@ -2,8 +2,8 @@
 #
 for((x=1;x<=24;++x));
   do 
-  ./AlcoR redundancy -v --hide --color 100 --ignore 5000 --dna -w 5000 -m 13:50:0:1:10:0.9/3:10:0.9 out$x.fasta > pc-d-$x.txt
-  ./AlcoR redundancy -v --no-size --hide --color 1 --ignore 5000 --dna -w 5000 -m 13:50:5000:1:10:0.9/3:10:0.9 out$x.fasta > pc-l-$x.txt
+  ./AlcoR mapper -v --hide --color 100 --ignore 5000 --dna -w 5000 -m 13:50:0:1:10:0.9/3:10:0.9 out$x.fasta > pc-d-$x.txt
+  ./AlcoR mapper -v --no-size --hide --color 1 --ignore 5000 --dna -w 5000 -m 13:50:5000:1:10:0.9/3:10:0.9 out$x.fasta > pc-l-$x.txt
   cat pc-d-$x.txt pc-l-$x.txt > pc-$x.txt;
   done
 for((x=1;x<=24;++x));

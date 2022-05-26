@@ -19,15 +19,15 @@ PROJECT (){
     done
     }
 #
-./AlcoR redundancy -v -n -m 5:50:500:1:10:0.9/1:10:0.9 -w $WINDOW sampleCProteins.fasta 1> pos_500.txt
-./AlcoR redundancy -v -n -m 5:50:5000:1:10:0.9/1:10:0.9 -w $WINDOW sampleCProteins.fasta 1> pos_5k.txt
-./AlcoR redundancy -v -n -m 5:50:0:1:10:0.9/1:10:0.9 -w $WINDOW sampleCProteins.fasta 1> pos_all.txt
+./AlcoR mapper -v -n -m 5:50:500:1:10:0.9/1:10:0.9 -w $WINDOW sampleCProteins.fasta 1> p_pos_500.txt
+./AlcoR mapper -v -n -m 5:50:5000:1:10:0.9/1:10:0.9 -w $WINDOW sampleCProteins.fasta 1> p_pos_5k.txt
+./AlcoR mapper -v -n -m 5:50:0:1:10:0.9/1:10:0.9 -w $WINDOW sampleCProteins.fasta 1> p_pos_all.txt
 #
-PROJECT "pos_500.txt" "0.25";
-PROJECT "pos_5k.txt" "0.75";
-PROJECT "pos_all.txt" "1.25";
+PROJECT "p_pos_500.txt" "0.25";
+PROJECT "p_pos_5k.txt" "0.75";
+PROJECT "p_pos_all.txt" "1.25";
 #
-SIZE=`grep -v ">" sampleCProteins.fasta | tr -d -c "ACGT" | wc -c`;
+SIZE=`grep -v ">" sampleCProteins.fasta | tr -d "\n" | wc -c`;
 #
   gnuplot << EOF
     reset
@@ -40,7 +40,7 @@ SIZE=`grep -v ">" sampleCProteins.fasta | tr -d -c "ACGT" | wc -c`;
     set size ratio 0.16
     set key out horiz center top
     set yrange [0:1.5]
-    set xrange [0:30000]
+    set xrange [0:$SIZE]
     set xtics auto
     #set ytics auto
     set ytics ("c=500" 0.25, "c=5k" 0.75, "c=all" 1.25)
@@ -60,6 +60,6 @@ SIZE=`grep -v ">" sampleCProteins.fasta | tr -d -c "ACGT" | wc -c`;
     set style line 11 lc rgb '#CC0000' lt 1 lw 1 pt 5 ps 0.4 # ---
     set style line 12 lc rgb '#FFFFFF' lt 1 lw 1 pt 5 ps 0.4 # ---
     #
-    plot "pos_500.txt.pro" using 1:2 w points t "" ls 5, "pos_5k.txt.pro" using 1:2 w points t "" ls 6, "pos_all.txt.pro" using 1:2 w points t "" ls 7, 0.25 t "" with lines ls 9, 0.75 t "" with lines ls 10, 1.25 t "" with lines ls 11
+    plot "p_pos_500.txt.pro" using 1:2 w points t "" ls 5, "p_pos_5k.txt.pro" using 1:2 w points t "" ls 6, "p_pos_all.txt.pro" using 1:2 w points t "" ls 7, 0.25 t "" with lines ls 9, 0.75 t "" with lines ls 10, 1.25 t "" with lines ls 11
 EOF
 

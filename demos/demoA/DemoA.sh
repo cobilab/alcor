@@ -19,9 +19,9 @@ PROJECT (){
     done
     }
 #
-./AlcoR redundancy -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w $WINDOW -t 0.5 sampleA.fasta 1> pos_05.txt
-./AlcoR redundancy -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w $WINDOW -t 1.0 sampleA.fasta 1> pos_10.txt
-./AlcoR redundancy -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w $WINDOW -t 1.5 sampleA.fasta 1> pos_15.txt
+./AlcoR mapper -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w $WINDOW -t 0.5 sampleA.fasta 1> pos_05.txt
+./AlcoR mapper -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w $WINDOW -t 1.0 sampleA.fasta 1> pos_10.txt
+./AlcoR mapper -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w $WINDOW -t 1.5 sampleA.fasta 1> pos_15.txt
 #
 PROJECT "pos_05.txt" "3.0";
 PROJECT "pos_10.txt" "3.5";

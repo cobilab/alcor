@@ -6,7 +6,7 @@
 The AlcoR tool contains one main menu (command: AlcoR) with the four sub menus for computing the features that it provides, namely
 <ul>
 <li><b>extract</b>: extracts a sequence of a FASTA file using positional coordinates (independent from the existing headers of the FASTA files);</li>
-<li><b>redundancy</b>: computes the low-complexity regions of a FASTA read while providing bidirectional complexity profiles and further structural similarity analysis;</li>
+<li><b>mapper</b>: computes the low-complexity regions of a FASTA read while providing bidirectional complexity profiles and further structural similarity analysis;</li>
 <li><b>simulation</b>: FASTA sequence simulation with features: file extraction, random generation, sequence modeling (with SNPs specific mutations);</li>
 <li><b>visual</b>: computes an SVG file with the respective map containing the low-complexity regions.</li>
 </ul>
@@ -39,9 +39,9 @@ Run AlcoR FASTA simulation tool:
 AlcoR simulation -rs 2000:0:1:0:0:0 -rs 2000:0:11:0:0:0 -rs 2000:0:1:0:0:0 -rs 2000:0:71:0:0:0 > sample.fasta;
 </pre>
 
-Run AlcoR low-complexity (redundancy) mapper:
+Run AlcoR low-complexity mapper:
 <pre>
-AlcoR redundancy -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 3 -t 0.5 sample.fasta
+AlcoR mapper -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 3 -t 0.5 sample.fasta
 </pre>
 
 ## PARAMETERS
@@ -58,7 +58,7 @@ AlcoR -h
 If you are not interested in viewing each sub-program option, type 
 <pre>
 AlcoR extract -h
-AlcoR redundancy -h
+AlcoR mapper -h
 AlcoR simulation -h
 AlcoR visual -h
 </pre>

@@ -5,7 +5,7 @@
 [![Speed](https://img.shields.io/static/v1.svg?label=Testing&message=High-speed%20&color=green)](#)
 [![NoFP](https://img.shields.io/static/v1.svg?label=Testing&message=High-sensitivity&color=blue)](#)
 [![NoFP](https://img.shields.io/static/v1.svg?label=Testing&message=No%20false%20positives&color=orange)](#)
-[![AFM](https://img.shields.io/static/v1.svg?label=AFM&message=alignment-free%20method&color=yellow)](#)
+[![AFM](https://img.shields.io/static/v1.svg?label=Method&message=alignment-free&color=yellow)](#)
 
 </div>
 

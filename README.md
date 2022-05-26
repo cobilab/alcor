@@ -13,7 +13,7 @@ The AlcoR tool contains one main menu (command: AlcoR) with the four sub menus f
 <ul>
 <li><b>extract</b>: extracts a sequence of a FASTA file using positional coordinates (independent from the existing headers of the FASTA files);</li>
 <li><b>mapper</b>: computes the low-complexity regions of a FASTA read while providing bidirectional complexity profiles and further structural similarity analysis;</li>
-<li><b>simulation</b>: FASTA sequence simulation with features: file extraction, random generation, sequence modeling (with SNPs specific mutations);</li>
+<li><b>simulation</b>: FASTA sequence simulation with features: file extraction, random generation, sequence modeling. Additionally, it allwos to apply specific SNPs probability mutations;</li>
 <li><b>visual</b>: computes an SVG file with the respective map containing the low-complexity regions.</li>
 </ul>
 </p>

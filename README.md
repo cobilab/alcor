@@ -1,5 +1,9 @@
 ![Conda](https://img.shields.io/conda/dn/bioconda/alcor)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
+[![Speed](https://img.shields.io/static/v1.svg?label=Ultra-Fast&message=High%20speed%20performance&color=green)](#)
+[![NoFP](https://img.shields.io/static/v1.svg?label=No-False-Positives&message=No%20false%20positives&color=orange)](#)
+[![AFM](https://img.shields.io/static/v1.svg?label=AFM&message=alignment-free%20method%20positives&color=yellow)](#)
+
 
 <p align="center"><img src="imgs/logo_trans.png" alt="AlcoR" width="250" border="0" /></p>
 <p align="center">

@@ -2,7 +2,10 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](LICENSE)
 
 <p align="center"><img src="imgs/logo_trans.png" alt="AlcoR" width="250" border="0" /></p>
-<b>Alignment-free simulation, computation, and visualization of local and distant low-complexity regions in FASTA data</b>. This method provides the ability of fast sequence characterization through low-complexity regions, ideally for scenarios entangling the presence of new or unknown sequences. AlcoR is implemented in C language using multi-threading to increase the computational speed, is flexible for multiple applications, and does not contain external dependencies. The tool accepts any sequence in FASTA format.
+<b>Alignment-free simulation, mapping, and visualization of local and distant low-complexity regions in FASTA data</b>. 
+
+This method provides the ability of fast sequence characterization through low-complexity regions, ideally for scenarios entangling the presence of new or unknown sequences. AlcoR offers important analysis advantages, such as the high-sensitivity, speed, and does not provide false positives, ideally to be applied in the current Telomere-to-telomere (T2T) sequencing and assembly methodologies. AlcoR is implemented in C language using multi-threading to increase the computational speed, is flexible for multiple applications, and does not contain external dependencies. The tool accepts any sequence in FASTA format.
+
 The AlcoR tool contains one main menu (command: AlcoR) with the four sub menus for computing the features that it provides, namely
 <ul>
 <li><b>extract</b>: extracts a sequence of a FASTA file using positional coordinates (independent from the existing headers of the FASTA files);</li>

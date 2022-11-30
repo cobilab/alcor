@@ -706,7 +706,7 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
 
     int sym;
     PO->idx = 0;
-    uint64_t position = 0;
+    uint64_t position = 1;
     while((sym = getc(IN)) != EOF)
       {
       if(sym == '>')

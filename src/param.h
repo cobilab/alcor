@@ -119,6 +119,7 @@ typedef struct
   U8        help;
   U8        verbose;
   U8        force;
+  U8        mask;
   U8        level;
   U8        dna;
   U8        hide;
@@ -136,6 +137,7 @@ typedef struct
   double    lr;
   char      *reference;
   char      *output;
+  char      *outputmask;
   char      *filename;
   SFILES    *ref;
   }

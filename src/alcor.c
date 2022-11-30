@@ -215,6 +215,7 @@ void P_LocalRedundancy(char **p, int c)
   MAP->verbose   = ArgsState  (DEF_LR_VERBOSE,   p, c, "-v", "--verbose");
   MAP->hide      = ArgsState  (DEF_LR_HIDE,      p, c, "-e", "--hide");
   MAP->dna       = ArgsState  (DEF_LR_DNA,       p, c, "-d", "--dna");
+  MAP->mask      = ArgsState  (DEF_LR_MASK,      p, c, "-k", "--mask");
   MAP->nosize    = ArgsState  (DEF_LR_NOSIZE,    p, c, "-n", "--no-size");
   MAP->threshold = ArgsDouble (DEF_LR_THRESHOLD, p, c, "-t", "--threshold");
   MAP->color     = ArgsNum    (DEF_LR_COLOR,     p, c, "-c", "--color",
@@ -282,6 +283,17 @@ void P_LocalRedundancy(char **p, int c)
   
   MAP->filename = p[c-1];
   CheckFileEmpty(MAP->filename);
+
+  int out_mask = 0;
+  for(n = 1 ; n < c ; ++n)
+    if(strcmp(p[n], "-o") == 0 || strcmp(p[n], "--output-mask") == 0)
+      {
+      MAP->outputmask = CloneString(p[n+1]);
+      out_mask = 1;
+      break;
+      }
+  if(out_mask == 0 && MAP->mask == 1)
+    MAP->outputmask = CloneString(Cat("masked-", MAP->filename));
 
   if(MAP->verbose) PrintParametersLR(MAP);
 

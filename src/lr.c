@@ -20,6 +20,7 @@
 #include "alphabet.h"
 #include "common.h"
 #include "cache.h"
+#include "positions.h"
 #include "pmodels.h"
 #include "strings.h"
 #include "cm.h"
@@ -648,6 +649,8 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   double smooth, min;
   uint64_t initPos = 1;
 
+  POS *PO = CreatePositions(10000);
+
   if(fgets(buffer, 1024, PROF_IN))
     {
     min = atof(buffer);
@@ -664,8 +667,12 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
       if(region == 0)
         {              
         region = 1; 
-        if(idx - initPos > P->ignore)	
+        if(idx - initPos > P->ignore)
+	  {	
           fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", initPos, idx, P->color);
+	  if(MAP->mask == 1)
+            UpdatePositions(PO, initPos, idx);
+	  }
         }
       }
     else // val < threshold ====> LOW_REGION
@@ -682,11 +689,54 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
     {
     if(idx - initPos > P->ignore)	  
     fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", initPos, idx, P->color);
+    if(MAP->mask == 1)
+      UpdatePositions(PO, initPos, idx);
     }
 
   fclose(PROF_IN);
-  
+
   if(P->hide) remove(Cat(P->filename, ".info"));
+
+  if(MAP->mask == 1) // MASK FASTA
+    {
+    if(P->verbose) fprintf(stderr, "[>] Masking sequence ...\n");
+    
+    FILE *IN  = Fopen(P->filename,   "r");
+    FILE *OUT = Fopen(P->outputmask, "w");
+
+    int sym;
+    PO->idx = 0;
+    uint64_t position = 0;
+    while((sym = getc(IN)) != EOF)
+      {
+      if(sym == '>')
+        { // HEADER FOUND!
+	fprintf(OUT, "%c", sym);
+        while((sym = fgetc(IN)) != EOF && sym != '\n')
+          fprintf(OUT, "%c", sym);
+	}
+      if(sym == EOF ) { fprintf(OUT, "%c", sym); break;    }
+      if(sym == '\n') { fprintf(OUT, "%c", sym); continue; }
+      
+      if(position >= PO->init[PO->idx] && position <= PO->end[PO->idx]) 
+        fprintf(OUT, "%c", tolower(sym));
+      else
+        fprintf(OUT, "%c", toupper(sym));
+
+      if(position > PO->end[PO->idx]) 
+        PO->idx++;
+      assert(PO->idx > PO->size);
+      ++position;
+      }
+
+    fclose(IN);
+    fclose(OUT);
+    
+    if(P->verbose) fprintf(stderr, "[>] Done!\n");
+    }
+
+  if(P->verbose) fprintf(stderr, "[>] Cleaning structures ...\n");
+  RemovePositions(PO);
 
   return;
   }

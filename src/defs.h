@@ -61,6 +61,7 @@ typedef int8_t   I8;
 #define DEF_LR_VERBOSE         0
 #define DEF_LR_THRESHOLD       0
 #define DEF_LR_WINDOW          5
+#define DEF_LR_MASK            0
 #define DEF_LR_IGNORE          10
 #define DEF_LR_REGION          500
 #define DEF_LR_ALPHABET        "ACGT"

@@ -262,6 +262,12 @@ void PrintMenuLR(void){
   "      -i [INT],  --ignore [INT]                                     \n"
   "           ignore lengths of segmented regions below this value,    \n"
   "                                                                    \n"
+  "      -k,  --mask                                                   \n"
+  "           it masks a FASTA sequence (LCRs appear in lower case),   \n"
+  "                                                                    \n"
+  "      -o,  --output-mask                                            \n"
+  "           output FASTA filename with the masked sequence,          \n"
+  "                                                                    \n"
   "      -p,  --show-parameters                                        \n"
   "           show parameters of the models for optimization,          \n"
   "                                                                    \n"
@@ -281,7 +287,7 @@ void PrintMenuLR(void){
   "      %s %s [OPTION]... [FILE]                         \n"
   "                                                                    \n"
   "EXAMPLE                                                             \n"
-  "      %s %s -v -w 50 -m 13:50:0:1:10:0.9/5:10:0.9 seq.fa \n"
+  "      %s %s -v -w 10 -m 13:50:0:1:10:0.9/5:10:0.9 -k -o m.fa seq.fa\n"
   "                                                                    \n",
   PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key);
   return;

@@ -17,8 +17,9 @@
 <p align="justify">
 This method provides the ability of fast sequence characterization through low-complexity regions, ideally for scenarios entangling the presence of new or unknown sequences. AlcoR offers important analysis advantages, such as the high-sensitivity, speed, and does not provide false positives, ideally to be applied in the current Telomere-to-telomere (T2T) sequencing and assembly methodologies. AlcoR is implemented in C language using multi-threading to increase the computational speed, is flexible for multiple applications, and does not contain external dependencies. The tool accepts any sequence in FASTA format.
 
-The AlcoR tool contains one main menu (command: <b>AlcoR</b>) with the four sub menus for computing the features that it provides, namely
+The AlcoR tool contains one main menu (command: <b>AlcoR</b>) with the five sub menus for computing the features that it provides, namely
 <ul>
+<li><b>info</b>: it provides information of the length and GC percentage for each FASTA read</li>
 <li><b>extract</b>: extracts a sequence of a FASTA file using positional coordinates (independent from the existing headers of the FASTA files);</li>
 <li><b>mapper</b>: computes the low-complexity regions of a FASTA read while providing bidirectional complexity profiles and further structural similarity analysis;</li>
 <li><b>simulation</b>: FASTA sequence simulation with features: file extraction, random generation, sequence modeling. Additionally, it allwos to apply specific SNPs probability mutations;</li>
@@ -72,6 +73,7 @@ AlcoR -h
 
 If you are not interested in viewing each sub-program option, type 
 <pre>
+AlcoR info -h
 AlcoR extract -h
 AlcoR mapper -h
 AlcoR simulation -h

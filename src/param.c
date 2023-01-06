@@ -573,6 +573,17 @@ void PrintParametersEX(EX_PARAMETERS *M)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+void PrintParametersIF(IF_PARAMETERS *M)
+  {
+  uint32_t n;
+
+  // VOID
+
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 void PrintParametersVI(VI_PARAMETERS *M)
   {
   uint32_t n;

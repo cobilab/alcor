@@ -82,6 +82,17 @@ typedef struct
   {
   U32       help;
   U32       verbose;
+  U8        fasta;
+  U64       init;
+  U64       end;
+  char      *filename;
+  }
+IF_PARAMETERS;
+
+typedef struct
+  {
+  U32       help;
+  U32       verbose;
   char      *alphabet;
   U8        dna;
   U32       nSym;
@@ -157,6 +168,7 @@ SFILES      *ReadFNames        (VI_PARAMETERS *, char *);
 void        PrintParametersLR  (LR_PARAMETERS *);
 void        PrintParametersSI  (SI_PARAMETERS *);
 void        PrintParametersEX  (EX_PARAMETERS *);
+void        PrintParametersIF  (IF_PARAMETERS *);
 void        PrintParametersVI  (VI_PARAMETERS *);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

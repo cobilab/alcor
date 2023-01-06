@@ -12,6 +12,7 @@
 #define K3  3
 #define K4  4
 #define K5  5
+#define K6  6
 
 typedef struct
   {
@@ -23,10 +24,11 @@ K_STRUCT;
 static K_STRUCT LT_KEYS[] = 
   { 
     { "help"          , K1  },  // HELP MENU
-    { "extract"       , K2  },  // EXTRACTION
-    { "mapper"        , K3  },  // LOW-COMPLEXITY MAPPER & MASKER
-    { "simulation"    , K4  },  // SIMULATION
-    { "visual"        , K5  }   // VISUALIZATION 
+    { "info"          , K2  },  // LENGTH AND GC FOR EACH READ
+    { "extract"       , K3  },  // EXTRACTION
+    { "mapper"        , K4  },  // LOW-COMPLEXITY MAPPER & MASKER
+    { "simulation"    , K5  },  // SIMULATION
+    { "visual"        , K6  }   // VISUALIZATION 
   };
 
 #define NKEYS (sizeof(LT_KEYS)/sizeof(K_STRUCT))

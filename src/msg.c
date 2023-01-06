@@ -41,6 +41,8 @@ void PrintMenu(void)
   "Usage: %s <command> [options]                           \n"
   "                                                        \n"
   "Commands:                                              \n"
+  "      %-10s   Retrieves information of the length and GC \n"
+  "                   percentage of each FASTA read.            \n" 
   "      %-10s   Extracts a sequence of a FASTA file using  \n" 
   "                   positional coordinates (independent from\n"
   "                   the existing headers of the FASTA files).\n"
@@ -56,7 +58,7 @@ void PrintMenu(void)
   "Help: %s <command> -h for accessing each command menu.\n"
   "                                                      \n",
   PNAME, VERSION, RELEASE, PNAME, LT_KEYS[1].key, LT_KEYS[2].key, 
-  LT_KEYS[3].key, LT_KEYS[4].key, PNAME);
+  LT_KEYS[3].key, LT_KEYS[4].key, LT_KEYS[5].key, PNAME);
   return;
   }
 
@@ -176,6 +178,38 @@ void PrintMenuVi(void){
   "      %s %s -v -o map.svg pos1.txt:pos2.txt:pos3.txt \n"
   "                                                                    \n",
   PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key);
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void PrintMenuIf(void){
+  fprintf(stderr,
+  "NAME                                                                \n"
+  "      %s %s                                        \n"
+  "                                                                    \n"
+  "DESCRIPTION                                                         \n"
+  "      It provides length and GC information of each FASTA read.     \n"
+  "                                                                    \n"
+  "PARAMETERS                                                          \n"
+  "                                                                    \n"
+  "      -h,  --help                                                   \n"
+  "           usage guide (help menu),                                 \n"
+  "                                                                    \n"
+  "      -v,  --verbose                                                \n"
+  "           verbose mode (more information),                         \n"
+  "                                                                    \n"
+  "      [FILE]                                                        \n"
+  "           input sequence filename (to analyze) -- MANDATORY,       \n"
+  "           FASTA file to retrieve information (last argument).      \n"
+  "                                                                    \n"
+  "SYNOPSIS                                                            \n"
+  "      %s %s [OPTION]... [FILE]                         \n"
+  "                                                                    \n"
+  "EXAMPLE                                                             \n"
+  "      %s %s -v -f seq.fa\n"
+  "                                                                    \n",
+  PNAME, LT_KEYS[1].key, PNAME, LT_KEYS[1].key, PNAME, LT_KEYS[1].key);
   return;
   }
 

@@ -13,6 +13,7 @@ void PrintModels     (void);
 void PrintMenuLR     (void);
 void PrintMenuSi     (void);
 void PrintMenuEx     (void);
+void PrintMenuIf     (void);
 void PrintMenuVi     (void);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

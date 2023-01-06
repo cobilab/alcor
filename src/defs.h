@@ -85,6 +85,10 @@ typedef int8_t   I8;
 #define DEF_EX_INIT            1
 #define DEF_EX_END             1
 
+#define DEF_IF_HELP            0
+#define DEF_IF_VERBOSE         0
+#define DEF_IF_FASTA           0
+
 #define DEF_VI_HELP            0
 #define DEF_VI_VERBOSE         0
 #define DEF_VI_SPACE           8

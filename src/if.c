@@ -44,7 +44,7 @@ void Information(IF_PARAMETERS *P)
   uint32_t k, idx; 
   FILE *F = Fopen(P->filename, "r");
 
-  uint32_t headerMax = 500;
+  uint32_t headerMax = 80;
   uint8_t  headerStr[headerMax + 1];
   uint32_t headerLen = 0;
   

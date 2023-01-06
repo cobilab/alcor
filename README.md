@@ -19,7 +19,7 @@ This method provides the ability of fast sequence characterization through low-c
 
 The AlcoR tool contains one main menu (command: <b>AlcoR</b>) with the five sub menus for computing the features that it provides, namely
 <ul>
-<li><b>info</b>: it provides information of the length and GC percentage for each FASTA read</li>
+<li><b>info</b>: it provides information of the length and GC percentage for each FASTA read;</li>
 <li><b>extract</b>: extracts a sequence of a FASTA file using positional coordinates (independent from the existing headers of the FASTA files);</li>
 <li><b>mapper</b>: computes the low-complexity regions of a FASTA read while providing bidirectional complexity profiles and further structural similarity analysis;</li>
 <li><b>simulation</b>: FASTA sequence simulation with features: file extraction, random generation, sequence modeling. Additionally, it allwos to apply specific SNPs probability mutations;</li>

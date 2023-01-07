@@ -28,11 +28,11 @@ SI_DEPS = cm.h dna.h msg.h rand.h buffer.h common.h strings.h param.h
 STRINGS_DEPS = msg.h
 TOLERANT_DEPS = strings.h pmodels.h buffer.h
 VI_DEPS = dna.h msg.h buffer.h common.h strings.h param.h paint.h
-
+IF_DEPS = dna.h msg.h buffer.h common.h strings.h param.h
 PROG = $(BIN)/AlcoR
 OBJS = mem.o positions.o stats.o rand.o math.o buffer.o chash.o carray.o \
 		cache.o filter.o keys.o msg.o strings.o common.o alphabet.o dist.o \
-		dna.o kmer.o levels.o ex.o paint.o param.o pmodels.o tolerant.o cm.o vi.o lr.o si.o
+		dna.o kmer.o levels.o ex.o paint.o param.o pmodels.o tolerant.o if.o cm.o vi.o lr.o si.o
 #-----------------------------------------------------------------------------
 
 all:
@@ -64,6 +64,8 @@ ex.o: ex.c ex.h $(DEPS) $(EX_DEPS)
 	$(CC) -c $(CFLAGS) ex.c
 filter.o: filter.c filter.h $(DEPS)
 	$(CC) -c $(CFLAGS) filter.c
+if.o: if.c if.h $(DEPS) $(IF_DEPS)
+	$(CC) -c $(CFLAGS) if.c 
 keys.o: keys.c keys.h $(DEPS)
 	$(CC) -c $(CFLAGS) keys.c
 kmer.o: kmer.c kmer.h $(DEPS) $(KMER_DEPS)

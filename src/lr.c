@@ -735,6 +735,24 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
     if(P->verbose) fprintf(stderr, "[>] Done!\n");
     }
 
+  if(MAP->renormalize == 1) // RENORMALIZE POSITIONS
+    {
+    if(P->verbose) fprintf(stderr, "[>] Renormalize positions ...\n");
+
+    SA *S = CreateSA();
+    GetCumulativeReadsLength(S, P->filename);
+    for(idx = 0 ; idx < S->idx ; ++idx)
+      fprintf(stderr, "[>] Cumulative read length %"PRIu64": %"PRIu64"\n", 
+      idx+1, S->array[idx]);
+
+
+
+
+    RemoveSA(S);
+
+    if(P->verbose) fprintf(stderr, "[>] Done!\n");
+    }
+
   if(P->verbose) fprintf(stderr, "[>] Cleaning structures ...\n");
   RemovePositions(PO);
 

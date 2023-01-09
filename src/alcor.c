@@ -246,21 +246,22 @@ void P_LocalRedundancy(char **p, int c)
 
   MAP = (LR_PARAMETERS *) Calloc(1, sizeof(LR_PARAMETERS));
 
-  MAP->help      = ArgsState  (DEF_LR_HELP,      p, c, "-h", "--help");
-  MAP->verbose   = ArgsState  (DEF_LR_VERBOSE,   p, c, "-v", "--verbose");
-  MAP->hide      = ArgsState  (DEF_LR_HIDE,      p, c, "-e", "--hide");
-  MAP->dna       = ArgsState  (DEF_LR_DNA,       p, c, "-d", "--dna");
-  MAP->mask      = ArgsState  (DEF_LR_MASK,      p, c, "-k", "--mask");
-  MAP->nosize    = ArgsState  (DEF_LR_NOSIZE,    p, c, "-n", "--no-size");
-  MAP->threshold = ArgsDouble (DEF_LR_THRESHOLD, p, c, "-t", "--threshold");
-  MAP->color     = ArgsNum    (DEF_LR_COLOR,     p, c, "-c", "--color",
-                              0, 255);
-  MAP->window    = ArgsNum    (DEF_LR_WINDOW,    p, c, "-w", "--window",
-                              0, 999999999);
-  MAP->ignore    = ArgsNum    (DEF_LR_IGNORE,    p, c, "-i", "--ignore",
-                              0, 999999999);
-  MAP->level     = ArgsNum    (0,                p, c, "-l", "--level",
-                              DEF_LR_MIN_LEVEL, DEF_LR_MAX_LEVEL);
+  MAP->help        = ArgsState  (DEF_LR_HELP,        p, c, "-h", "--help");
+  MAP->verbose     = ArgsState  (DEF_LR_VERBOSE,     p, c, "-v", "--verbose");
+  MAP->hide        = ArgsState  (DEF_LR_HIDE,        p, c, "-e", "--hide");
+  MAP->dna         = ArgsState  (DEF_LR_DNA,         p, c, "-d", "--dna");
+  MAP->mask        = ArgsState  (DEF_LR_MASK,        p, c, "-k", "--mask");
+  MAP->nosize      = ArgsState  (DEF_LR_NOSIZE,      p, c, "-n", "--no-size");
+  MAP->renormalize = ArgsState  (DEF_LR_RENORMALIZE, p, c, "-r", "--renormalize");
+  MAP->threshold   = ArgsDouble (DEF_LR_THRESHOLD,   p, c, "-t", "--threshold");
+  MAP->color       = ArgsNum    (DEF_LR_COLOR,       p, c, "-c", "--color",
+                                0, 255);
+  MAP->window      = ArgsNum    (DEF_LR_WINDOW,      p, c, "-w", "--window",
+                                0, 999999999);
+  MAP->ignore      = ArgsNum    (DEF_LR_IGNORE,      p, c, "-i", "--ignore",
+                                0, 999999999);
+  MAP->level       = ArgsNum    (0,                  p, c, "-l", "--level",
+                                DEF_LR_MIN_LEVEL, DEF_LR_MAX_LEVEL);
 
   if(c < MIN_NPARAM_FOR_PROGS + 1 || MAP->help)
     {

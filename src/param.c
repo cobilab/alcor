@@ -440,6 +440,8 @@ void PrintParametersLR(LR_PARAMETERS *M)
   "no" : "yes");
   fprintf(stderr, "[>] Applying mask .................. %s\n", M->mask == 0 ? 
   "no" : "yes");
+  fprintf(stderr, "[>] Renormalize .................... %s\n", M->renormalize 
+  == 0 ? "no" : "yes");
   fprintf(stderr, "[>] Color for visualization ........ %u\n", M->color);
   fprintf(stderr, "[>] Low-pass window size ........... %u\n", M->window);
   for(n = 0 ; n < M->nModels ; ++n){

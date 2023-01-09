@@ -32,8 +32,8 @@ uint32_t size)
     fprintf(stdout, "%c", header[x]);
   fprintf(stdout, "\n");
 
-  return;
-  }
+return;
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // - - - - - - - - - - - I N F O R M A T I O N   M A I N - - - - - - - - - - -

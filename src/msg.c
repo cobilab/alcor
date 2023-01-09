@@ -177,7 +177,7 @@ void PrintMenuVi(void){
   "EXAMPLE                                                             \n"
   "      %s %s -v -o map.svg pos1.txt:pos2.txt:pos3.txt \n"
   "                                                                    \n",
-  PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key);
+  PNAME, LT_KEYS[5].key, PNAME, LT_KEYS[5].key, PNAME, LT_KEYS[5].key);
   return;
   }
 
@@ -250,7 +250,7 @@ void PrintMenuEx(void){
   "EXAMPLE                                                             \n"
   "      %s %s -v -f -i 101 -e 301 seq.fa\n"
   "                                                                    \n",
-  PNAME, LT_KEYS[1].key, PNAME, LT_KEYS[1].key, PNAME, LT_KEYS[1].key);
+  PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key);
   return;
   }
 
@@ -302,6 +302,9 @@ void PrintMenuLR(void){
   "      -o,  --output-mask                                            \n"
   "           output FASTA filename with the masked sequence,          \n"
   "                                                                    \n"
+  "      -r,  --renormalize                                            \n"
+  "           renormalize the positions of a multi-FASTA file,         \n"
+  "                                                                    \n"
   "      -p,  --show-parameters                                        \n"
   "           show parameters of the models for optimization,          \n"
   "                                                                    \n"
@@ -323,7 +326,7 @@ void PrintMenuLR(void){
   "EXAMPLE                                                             \n"
   "      %s %s -v -w 10 -m 13:50:0:1:10:0.9/5:10:0.9 -k -o m.fa seq.fa\n"
   "                                                                    \n",
-  PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key, PNAME, LT_KEYS[2].key);
+  PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key);
   return;
   }
 
@@ -396,7 +399,7 @@ void PrintMenuSi(void){
   "EXAMPLE                                                             \n"
   "      %s %s -rs 50:0:1:0.1:0:0 -ms 80:7:50:0:7:0:0:0:x.fa\n"
   "                                                                    \n",
-  PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key);
+  PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key, PNAME, LT_KEYS[4].key);
   return;
   }
 

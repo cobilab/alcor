@@ -48,6 +48,78 @@ void CountFastaReadsAndMax(FASTA_READS *FA, char *fn)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+SA *CreateSA(void)
+  {
+  SA *S    = (SA *) Calloc(1, sizeof(SA));
+  S->array = (uint64_t *) Calloc(1, sizeof(uint64_t));
+  S->size  = 1;
+  S->idx   = 0;
+  return S;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void UpdateSA(SA *S, uint64_t len)
+  {
+  if(S->idx == 0) S->array[S->idx] = len;
+  else            S->array[S->idx] = S->array[S->idx-1] + len;
+  S->array = (uint64_t *) Realloc(S->array, ++S->size * sizeof(uint64_t), 
+	     sizeof(uint64_t));
+  ++S->idx;
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void RemoveSA(SA *S)
+  {
+  free(S->array);
+  free(S);
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+void GetCumulativeReadsLength(SA *S, char *fn)
+  {
+  uint8_t buffer[BUFFER_SIZE], sym = 0, header = 1;
+  uint32_t k, idx;
+  FILE *F = Fopen(fn, "r");
+  uint64_t seqLen = 0;
+  uint64_t readIdx = 0;
+
+  while((k = fread(buffer, 1, BUFFER_SIZE, F)))
+    for(idx = 0 ; idx < k ; ++idx)
+      {
+      sym = buffer[idx];
+      if(sym == '>')
+        {
+        if(readIdx > 0)
+	  UpdateSA(S, seqLen);
+
+        header = 1;
+        ++readIdx;
+        seqLen = 0;
+        continue;
+        }
+      if(sym == '\n' && header == 1)
+        {
+        header = 0;
+        continue;
+        }
+      if(sym == '\n') continue;
+      if(header == 1) continue;
+
+      ++seqLen;
+      }
+
+  UpdateSA(S, seqLen);
+
+  fclose(F);
+  return;
+  }
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 FASTA_READS *CreateFastaReads(void)
   {
   FASTA_READS *FA = (FASTA_READS *) Calloc(1, sizeof(FASTA_READS));

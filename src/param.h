@@ -134,6 +134,7 @@ typedef struct
   U8        level;
   U8        dna;
   U8        hide;
+  U8        renormalize;
   U8        nosize;
   double    threshold;
   U32       color;

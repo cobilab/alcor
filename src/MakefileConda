@@ -9,7 +9,7 @@ CPLP   =
 #-----------------------------------------------------------------------------
 CFLAGS = -Wall -Ofast -march=native -mtune=native $(CPLP)
 #-----------------------------------------------------------------------------
-LIBS   = -lm
+LIBS = -lm
 DEPS   = defs.h mem.h
 ALCOR_DEPS = keys.h msg.h dna.h param.h common.h levels.h strings.h lr.h si.h ex.h vi.h
 ALHABET_DEPS = common.h

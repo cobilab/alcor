@@ -2,3 +2,5 @@ src/*.o
 .vscode/settings.json
 .gitignore
 v1.0.zip
+*.gch
+src/AlcoR

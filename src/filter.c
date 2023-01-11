@@ -7,6 +7,7 @@
 #include "filter.h"
 #include "mem.h"
 
+#define M_PI   3.14159265358979323846264338327950288
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 static double CalcMean(Entry *entries, int nEntries, int n, int M, double *w){

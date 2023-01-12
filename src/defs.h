@@ -31,6 +31,11 @@ typedef int8_t   I8;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+#define M_LN2                  0.69314718
+#define M_PI                   3.14159265
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 #define MAX_STR                2048
 #define BUFFER_SIZE            65535    
 #define PROGRESS_MIN           200

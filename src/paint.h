@@ -46,7 +46,7 @@ typedef struct
   } 
 HsvColor;
 
-double scale;
+static double scale;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

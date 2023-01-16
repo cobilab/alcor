@@ -744,9 +744,27 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
     for(idx = 0 ; idx < S->idx ; ++idx)
       fprintf(stderr, "[>] Cumulative read length %"PRIu64": %"PRIu64"\n", 
       idx+1, S->array[idx]);
+ 
+    uint64_t idx_pos = 0, idx_cum = 0;
+    uint64_t cum_value = S->array[0];
+    uint64_t i_pos = 0, e_pos = 0;
 
+    for(idx_pos = 0 ; idx_pos < PO->idx ; ++idx_pos)
+      {
+      i_pos = PO->init[idx_pos];
+      e_pos = PO->end [idx_pos];
 
-
+      for(idx_cum = 1 ; idx_cum < S->idx ; ++idx_cum)
+	{
+        if(i_pos <= S->array[idx_cum] && e_pos <= S->array[idx_cum] &&
+	i_pos >= S->array[idx_cum-1] && e_pos >= S->array[idx_cum-1])
+	  {
+          fprintf(stderr, "%"PRIu64"\t%"PRIu64"\t%u\n", 
+	  i_pos-S->array[idx_cum-1], e_pos-S->array[idx_cum-1], P->color);
+	  break;
+	  }
+	}
+      }
 
     RemoveSA(S);
 

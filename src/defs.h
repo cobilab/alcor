@@ -31,7 +31,6 @@ typedef int8_t   I8;
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-<<<<<<< HEAD
 #ifndef M_LN2
 #define M_LN2                  0.69314718
 #endif
@@ -39,10 +38,6 @@ typedef int8_t   I8;
 #ifndef M_PI
 #define M_PI                   3.14159265
 #endif
-=======
-//#define M_LN2                  0.69314718
-//#define M_PI                   3.14159265
->>>>>>> 4d634058c531d6c8673f464d4eccf68c5ae2ab5b
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

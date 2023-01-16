@@ -759,7 +759,7 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
         if(i_pos <= S->array[idx_cum] && e_pos <= S->array[idx_cum] &&
 	i_pos >= S->array[idx_cum-1] && e_pos >= S->array[idx_cum-1])
 	  {
-          fprintf(stderr, "%"PRIu64"\t%"PRIu64"\t%u\n", 
+          fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", 
 	  i_pos-S->array[idx_cum-1], e_pos-S->array[idx_cum-1], P->color);
 	  break;
 	  }

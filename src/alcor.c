@@ -331,6 +331,17 @@ void P_LocalRedundancy(char **p, int c)
   if(out_mask == 0 && MAP->mask == 1)
     MAP->outputmask = CloneString(Cat("masked-", MAP->filename));
 
+  int prefix = 0;
+  for(n = 1 ; n < c ; ++n)
+    if(strcmp(p[n], "-f") == 0 || strcmp(p[n], "--prefix") == 0)
+      {
+      MAP->prefix = CloneString(p[n+1]);
+      prefix = 1;
+      break;
+      }
+  if(prefix == 0)
+    MAP->prefix = CloneString("WG-");
+
   if(MAP->verbose) PrintParametersLR(MAP);
 
   LocalRedundancy(MAP);

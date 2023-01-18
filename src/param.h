@@ -150,6 +150,7 @@ typedef struct
   char      *reference;
   char      *output;
   char      *outputmask;
+  char      *prefix;
   char      *filename;
   SFILES    *ref;
   }

@@ -442,6 +442,8 @@ void PrintParametersLR(LR_PARAMETERS *M)
   "no" : "yes");
   fprintf(stderr, "[>] Renormalize .................... %s\n", M->renormalize 
   == 0 ? "no" : "yes");
+  if(M->renormalize == 1)
+    fprintf(stderr, "[>] Prefix ......................... %s\n", M->prefix); 
   fprintf(stderr, "[>] Color for visualization ........ %u\n", M->color);
   fprintf(stderr, "[>] Low-pass window size ........... %u\n", M->window);
   for(n = 0 ; n < M->nModels ; ++n){

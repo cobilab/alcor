@@ -28,6 +28,33 @@
 LR_PARAMETERS *P; // FOR THREAD SHARING
 
 //////////////////////////////////////////////////////////////////////////////
+// - - - - - - - P R I N T   R E G I O N   T O   F I L E - - - - - - - - - - - 
+
+void PrintRegionToFile(uint64_t i, uint64_t e, uint32_t color, FILE *F)
+  {
+  fprintf(F, "%"PRIu64"\t%"PRIu64"\t%u\n", i, e, color);
+  return;
+  }
+
+//////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - - - - P R I N T   R E G I O N - - - - - - - - - - - - - - 
+
+void PrintRegion(uint64_t i, uint64_t e, uint32_t color)
+  {
+  fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", i, e, color);
+  return;
+  }
+
+//////////////////////////////////////////////////////////////////////////////
+// - - - - - - - - - - - - P R I N T   H E A D E R - - - - - - - - - - - - - -
+
+void PrintHeader(uint64_t idx, uint64_t size)
+  {
+  fprintf(stdout, "#Length %"PRIu64" (id: %"PRIu64" )\n", size, idx);
+  return;
+  }
+
+//////////////////////////////////////////////////////////////////////////////
 // - - - - - - - - - - C O M P R E S S O R   D N A - - - - - - - - - - - - - -
 
 void CompressTargetDNA(THREADS T)
@@ -643,7 +670,8 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
   if(P->verbose) fprintf(stderr, "[>] Segmenting the regions ...\n");
 
   FILE *PROF_IN = Fopen(Cat(P->filename, ".info"), "r");
-  if(!P->nosize) fprintf(stdout, "#Length\t%"PRIu64"\n", nValues);
+  if(!P->nosize && P->renormalize == 0) 
+    fprintf(stdout, "#Length\t%"PRIu64"\n", nValues);
  
   int region;
   double smooth, min;
@@ -669,9 +697,9 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
         region = 1; 
         if(idx - initPos > P->ignore)
 	  {	
-          fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", initPos, idx, P->color);
-	  if(MAP->mask == 1)
-            UpdatePositions(PO, initPos, idx);
+          if(MAP->renormalize != 1)
+	    PrintRegion(initPos, idx, P->color);
+          UpdatePositions(PO, initPos, idx);
 	  }
         }
       }
@@ -687,10 +715,12 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
 
   if(region == 0)
     {
-    if(idx - initPos > P->ignore)	  
-    fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", initPos, idx, P->color);
-    if(MAP->mask == 1)
+    if(idx - initPos > P->ignore)
+      {
+      if(MAP->renormalize != 1)
+	PrintRegion(initPos, idx, P->color);
       UpdatePositions(PO, initPos, idx);
+      }
     }
 
   fclose(PROF_IN);
@@ -741,31 +771,70 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
 
     SA *S = CreateSA();
     GetCumulativeReadsLength(S, P->filename);
+    uint64_t last = 0;
     for(idx = 0 ; idx < S->idx ; ++idx)
-      fprintf(stderr, "[>] Cumulative read length %"PRIu64": %"PRIu64"\n", 
-      idx+1, S->array[idx]);
- 
-    uint64_t idx_pos = 0, idx_cum = 0;
-    uint64_t cum_value = S->array[0];
-    uint64_t i_pos = 0, e_pos = 0;
-
-    for(idx_pos = 0 ; idx_pos < PO->idx ; ++idx_pos)
       {
-      i_pos = PO->init[idx_pos];
-      e_pos = PO->end [idx_pos];
-
-      for(idx_cum = 1 ; idx_cum < S->idx ; ++idx_cum)
-	{
-        if(i_pos <= S->array[idx_cum] && e_pos <= S->array[idx_cum] &&
-	i_pos >= S->array[idx_cum-1] && e_pos >= S->array[idx_cum-1])
-	  {
-          fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%u\n", 
-	  i_pos-S->array[idx_cum-1], e_pos-S->array[idx_cum-1], P->color);
-	  break;
-	  }
-	}
+      if(P->verbose)
+        fprintf(stderr, "[>] Cumulative read length %"PRIu64": %"PRIu64" "
+        "(size: %"PRIu64" )\n", idx+1, S->array[idx], S->array[idx] - last);
+      last = S->array[idx];
       }
 
+    uint64_t i_pos = 0, e_pos = 0;
+    uint64_t i_cum = 0, e_cum = 0;
+    uint64_t idx_pos = 0, idx_cum = 0, tmp = 0;
+    uint64_t c_array[S->idx+1];
+    c_array[0] = 0;
+    for(idx_cum = 0 ; idx_cum < S->idx ; ++idx_cum)
+      c_array[idx_cum+1] = S->array[idx_cum];
+    
+    FILE **OP = (FILE **) Malloc((S->idx + 1) * sizeof(FILE *));
+    for(idx_cum = 1 ; idx_cum <= S->idx ; ++idx_cum)
+      {
+      char name[200]; //TODO SET THIS WITH A PREFIX
+      sprintf(name, "WG-%"PRIu64".txt", idx_cum);
+      OP[idx_cum] = Fopen(name, "w");
+      fprintf(OP[idx_cum], "#Length %"PRIu64" (id: %"PRIu64" )\n", 
+      c_array[idx_cum]-c_array[idx_cum-1], idx_cum);
+      }
+
+    for(idx_cum = 1 ; idx_cum <= S->idx ; ++idx_cum)
+      {
+      i_cum = c_array[idx_cum-1];
+      e_cum = c_array[idx_cum];
+
+      for(idx_pos = 0 ; idx_pos < PO->idx ; ++idx_pos) // FOR EACH POSITION PAIR
+        {
+        i_pos = PO->init[idx_pos];
+        e_pos = PO->end [idx_pos];
+
+        if(i_pos > i_cum && i_pos <= e_cum && e_pos > i_cum && e_pos <= e_cum)
+          {
+	  PrintRegionToFile(i_pos-i_cum, e_pos-i_cum, P->color, OP[idx_cum]);
+	  continue;
+          }
+
+	if(i_pos > i_cum && i_pos <= e_cum && e_pos > i_cum && e_pos >  e_cum)
+          {
+          PrintRegionToFile(i_pos-i_cum, e_cum-i_cum, P->color, OP[idx_cum]);
+	  for(tmp = idx_cum + 1 ; tmp <= S->idx ; ++tmp)
+            {
+            uint64_t i_tmp = c_array[tmp-1];
+            uint64_t e_tmp = c_array[tmp];
+	    if(e_pos < e_tmp)
+              {
+              PrintRegionToFile(1, e_pos-i_tmp, P->color, OP[tmp]);
+              break;
+              }
+            else
+              PrintRegionToFile(1, e_tmp-i_tmp, P->color, OP[tmp]);
+            }
+          }
+        } 
+      }
+
+    for(idx_cum = 1 ; idx_cum <= S->idx ; ++idx_cum)
+      fclose(OP[idx_cum]);
     RemoveSA(S);
 
     if(P->verbose) fprintf(stderr, "[>] Done!\n");

@@ -795,8 +795,10 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
       char *name = (char *) malloc(size + 1 * sizeof(char));
       sprintf(name, "%s%"PRIu64".txt", P->prefix, idx_cum);
       OP[idx_cum] = Fopen(name, "w");
-      fprintf(OP[idx_cum], "#Length %"PRIu64" (id: %"PRIu64" )\n", 
-      c_array[idx_cum]-c_array[idx_cum-1], idx_cum);
+      //fprintf(OP[idx_cum], "#Length %"PRIu64" (id: %"PRIu64" )\n", 
+      //c_array[idx_cum]-c_array[idx_cum-1], idx_cum);
+      fprintf(OP[idx_cum], "#Length %"PRIu64"\n", 
+      c_array[idx_cum]-c_array[idx_cum-1]);
       }
 
     for(idx_cum = 1 ; idx_cum <= S->idx ; ++idx_cum) // FOR EACH INTERVAL

@@ -27,7 +27,7 @@ typedef int8_t   I8;
 
 #define PNAME                  "AlcoR"
 #define VERSION                1
-#define RELEASE                9
+#define RELEASE                10
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -44,7 +44,7 @@ void Information(IF_PARAMETERS *P)
   uint32_t k, idx; 
   FILE *F = Fopen(P->filename, "r");
 
-  uint32_t headerMax = P->headerMax;
+  uint32_t headerMax = P->headerMax + 1;
   uint8_t  headerStr[headerMax + 3];
   headerStr[headerMax + 2] = '\0';
   uint32_t headerLen = 0;
@@ -67,8 +67,7 @@ void Information(IF_PARAMETERS *P)
           PrintEntryRead(readIdx, seqLen, (double) seqGC, headerStr, headerLen);
 
 	header = 1;
-	headerStr[0] = '>';
-	headerLen = 1;
+	headerLen = 0;
 
 	++readIdx;
 	seqLen = 0;

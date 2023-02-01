@@ -28,7 +28,7 @@ uint32_t size)
  
   fprintf(stdout, "%"PRIu64"\t%"PRIu64"\t%.4g\t", idx, len, GC / len * 100);
 
-  for(x = 1 ; x <= size ; ++x)
+  for(x = 1 ; x < size ; ++x)
     fprintf(stdout, "%c", header[x]);
   fprintf(stdout, "\n");
 
@@ -44,8 +44,9 @@ void Information(IF_PARAMETERS *P)
   uint32_t k, idx; 
   FILE *F = Fopen(P->filename, "r");
 
-  uint32_t headerMax = 80;
-  uint8_t  headerStr[headerMax + 1];
+  uint32_t headerMax = P->headerMax;
+  uint8_t  headerStr[headerMax + 3];
+  headerStr[headerMax + 2] = '\0';
   uint32_t headerLen = 0;
   
   uint64_t seqLen = 0; 
@@ -58,7 +59,10 @@ void Information(IF_PARAMETERS *P)
       {
       sym = buffer[idx];
       if(sym == '>')
-        { 
+        {
+        if(headerLen > headerMax)
+	  headerLen = headerMax;
+
 	if(readIdx > 0)
           PrintEntryRead(readIdx, seqLen, (double) seqGC, headerStr, headerLen);
 
@@ -90,7 +94,10 @@ void Information(IF_PARAMETERS *P)
         ++seqGC;
       
       }
-	  
+
+  if(headerLen > headerMax)
+    headerLen = headerMax;
+
   PrintEntryRead(readIdx, seqLen, (double) seqGC, headerStr, headerLen);
 
   fclose(F);

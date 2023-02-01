@@ -581,7 +581,8 @@ void PrintParametersIF(IF_PARAMETERS *M)
   {
   uint32_t n;
 
-  // VOID
+  fprintf(stderr, "[>] Header maximum length .......... %"PRIu64"\n", 
+  M->headerMax);
 
   return;
   }

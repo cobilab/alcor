@@ -85,6 +85,7 @@ typedef struct
   U8        fasta;
   U64       init;
   U64       end;
+  U64       headerMax;
   char      *filename;
   }
 IF_PARAMETERS;

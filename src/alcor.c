@@ -108,6 +108,8 @@ void P_Information(char **p, int c)
 
   MAP->help        = ArgsState  (DEF_IF_HELP,    p, c, "-h", "--help");
   MAP->verbose     = ArgsState  (DEF_IF_VERBOSE, p, c, "-v", "--verbose");
+  MAP->headerMax   = ArgsNum    (DEF_IF_MAX,     p, c, "-m", "--header-max",
+		     10, 999999);
 
   if(c < MIN_NPARAM_FOR_PROGS+1 || MAP->help)
     {

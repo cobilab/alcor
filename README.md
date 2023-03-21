@@ -16,12 +16,14 @@
 
 <p align="justify">
 AlcoR provides the ability of fast sequence characterization through low-complexity regions, ideally for scenarios entangling the presence of new or unknown sequences. AlcoR offers important analysis advantages, such as the high-sensitivity, speed, and does not provide false positives, ideally to be applied in the current Telomere-to-telomere (T2T) sequencing and assembly methodologies. AlcoR is implemented in C language using multi-threading to increase the computational speed, is flexible for multiple applications, and does not contain external dependencies. The tool accepts any sequence in FASTA format.
+</p>
 
 <video width="80%" height="40%" controls>
   <source src="cobilab.github.io/alcor/videos/AlcoR_tutorial.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
+<p align="justify">
 The AlcoR tool contains one main menu (command: <b>AlcoR</b>) with the five sub menus for computing the features that it provides, namely
 <ul>
 <li><b>info</b>: it provides information of the length and GC percentage for each FASTA read;</li>

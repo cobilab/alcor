@@ -12,6 +12,7 @@
 <p align="center"><img src="imgs/logo_trans.png" alt="AlcoR" width="250" border="0" /></p>
 <p align="center">
 <b>Alignment-free simulation, mapping, and visualization of low-complexity regions in FASTA data</b>. 
+<a href="https://cobilab.github.io/alcor">https://cobilab.github.io/alcor</a>
 </p>
 
 <p align="justify">

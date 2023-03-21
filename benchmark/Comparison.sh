@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# conda install -c bioconda bedtools=2.29.2 -y
-# conda install -c bioconda emboss -y 
+conda install -c bioconda bedtools=2.29.2 -y
+conda install -c bioconda emboss -y 
 #
 # Get all
 bedtools intersect -f 1 -a hap1.alcor.bed  -b TME204_HiFi_HiC_allmap.hap1.chr.fasta.out.gff -wa > hap1_alcor_full_overlap.bed

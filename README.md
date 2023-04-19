@@ -348,7 +348,9 @@ EXAMPLE
 
 On using this software/method please cite:
 
-* pending
+* Article in revision
+
+* Preprint: [here](https://doi.org/10.1101/2023.04.17.537157)
 
 ## ISSUES ##
 

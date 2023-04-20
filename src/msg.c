@@ -312,7 +312,7 @@ void PrintMenuLR(void){
   "           use this prefix for the output of renormalize (if on),   \n"
   "                                                                    \n"
   "      -p,  --show-parameters                                        \n"
-  "           show parameters of the models for optimization,          \n"
+  "           show parameters of the models for optimization (-m),     \n"
   "                                                                    \n"
   "      -s,  --show-levels                                            \n"
   "           show pre-computed compression levels (parameters),       \n"
@@ -330,7 +330,7 @@ void PrintMenuLR(void){
   "      %s %s [OPTION]... [FILE]                         \n"
   "                                                                    \n"
   "EXAMPLE                                                             \n"
-  "      %s %s -v -w 10 -m 13:50:0:1:10:0.9/5:10:0.9 -k -o m.fa seq.fa\n"
+  "      %s %s -v -d -w 5 -m 13:50:0:1:10:0.9/5:10:0.9 -k -o m.fa in.fa\n"
   "                                                                    \n",
   PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key);
   return;

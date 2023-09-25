@@ -745,16 +745,18 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
         while((sym = fgetc(IN)) != EOF && sym != '\n')
           fprintf(OUT, "%c", sym);
 	}
-      if(sym == EOF ) { fprintf(OUT, "%c", sym); break;    }
-      if(sym == '\n') { fprintf(OUT, "%c", sym); continue; }
       
+      if(sym == EOF ) { break; }
+      if(sym == '\n') { fprintf(OUT, "%c", sym); continue; }
+
       if(position >= PO->init[PO->idx] && position <= PO->end[PO->idx]) 
         fprintf(OUT, "%c", tolower(sym));
       else
         fprintf(OUT, "%c", toupper(sym));
 
-      if(position > PO->end[PO->idx]) 
+      if(position > PO->end[PO->idx] && PO->idx < PO->size) 
         PO->idx++;
+
       assert(PO->idx > PO->size);
       ++position;
       }

@@ -310,7 +310,7 @@ void PrintMenuLR(void){
   "           output FASTA filename with the masked sequence,          \n"
   "                                                                    \n"
   "      -r,  --renormalize                                            \n"
-  "           renormalize the positions of a multi-FASTA file,         \n"
+  "           renormalize the multi-FASTA positions (whole genome),    \n"
   "                                                                    \n"
   "      -f [STRING],  --prefix [STRING]                               \n"
   "           use this prefix for the output of renormalize (if on),   \n"

@@ -13,7 +13,7 @@
 #define ARRAY_MODE            0
 #define HASH_TABLE_MODE       1
 
-#define MAX_ARRAY_MEMORY      2048    //Size in MBytes
+#define MAX_ARRAY_MEMORY      8192    //Size in MBytes
 
 typedef struct
   {

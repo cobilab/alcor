@@ -119,7 +119,6 @@ void CompressTargetDNA(THREADS T)
       if(sym != 'A' && sym != 'C' && sym != 'G' && sym != 'T')
         {
         fprintf(Writter, "%lf\n", 2.0);  // FORCE HIGH COMPLEXITY
-        //fwrite(&dv, sizeof(float), 1, Writter);
         continue;
         }
 

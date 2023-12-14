@@ -753,7 +753,7 @@ void LocalRedundancy(LR_PARAMETERS *MAP)
       else
         fprintf(OUT, "%c", toupper(sym));
 
-      if(position > PO->end[PO->idx] && PO->idx < PO->size) 
+      if(PO->idx < PO->size && position > PO->end[PO->idx]) 
         PO->idx++;
 
       assert(PO->idx > PO->size);

@@ -348,9 +348,7 @@ EXAMPLE
 
 On using this software/method please cite:
 
-* Article in revision
-
-* Preprint: [here](https://doi.org/10.1101/2023.04.17.537157)
+* J. M. Silva, W. Qi, A. J. Pinho, D. Pratas, AlcoR: alignment-free simulation, mapping, and visualization of low-complexity regions in biological data, GigaScience, Volume 12, 2023. [Download](https://doi.org/10.1093/gigascience/giad101)
 
 ## ISSUES ##
 

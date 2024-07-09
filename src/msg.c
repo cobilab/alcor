@@ -71,9 +71,13 @@ void PrintModels(void){
   "                                                               \n"
   "Template of a target context model.                            \n"
   "                                                               \n"
-  "Examples for DNA sequnces (--dna):                             \n"
+  "Examples for DNA sequences (--dna):                            \n"
   "-m 13:50:0:1:10:0.9/5:10:0.9  (up to 200MB sequence length)    \n"
   "-m 14:100:0:1:10:0.9/5:10:0.9 (larger sequence lengths)        \n"
+  "                                                               \n"
+  "Examples for Protein/other sequences (--no-dna):               \n"
+  "-m 6:20:0:0:10:0.9/3:10:0.9                                    \n"
+  "-m 5:10:0:0:10:0.9/1:1:0.9                                     \n"
   "                                                               \n"
   "Parameter details:                                             \n"
   "     [C]: (integer [1;20]) order size of the regular context   \n"
@@ -333,10 +337,14 @@ void PrintMenuLR(void){
   "SYNOPSIS                                                            \n"
   "      %s %s [OPTION]... [FILE]                         \n"
   "                                                                    \n"
-  "EXAMPLE                                                             \n"
+  "DNA SEQUENCE EXAMPLE                                                \n"
   "      %s %s -v -d -w 5 -m 13:50:0:1:10:0.9/5:10:0.9 -k -o m.fa in.fa\n"
+  "                                                                    \n"
+  "PROTEIN SEQUENCE EXAMPLE                                            \n"
+  "      %s %s -v -w 5 -m 6:10:0:0:10:0.9/3:1:0.9 -k -o m.fa in.fa\n"
   "                                                                    \n",
-  PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key);
+  PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key, PNAME, LT_KEYS[3].key,
+  PNAME, LT_KEYS[3].key);
   return;
   }
 

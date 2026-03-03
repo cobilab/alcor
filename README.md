@@ -37,7 +37,15 @@ The AlcoR tool contains one main menu (command: <b>AlcoR</b>) with the five sub 
 
 ## INSTALLATION ##
 
-### Conda
+The program is already made available compiled (for Linux) in the bin/ folder. For access:
+```bash
+cd bin/
+chmod +x AlcoR
+./AlcoR
+```
+MD5SUM: 159c777ffb2010be81cf2eafa01ee338
+
+### Conda installation
 Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html), then run the following:
 ```bash
 conda install -y -c bioconda alcor

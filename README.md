@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <b>🧬 Alignment-free simulation, mapping, and visualization of low-complexity regions (LCRs) in FASTA data</b>
+  <b>🧬 Alignment-free simulation, mapping, and visualization<br/> of low-complexity regions (LCRs) in FASTA data</b>
   <br/>
   <a href="https://cobilab.github.io/alcor"><b>cobilab.github.io/alcor</b></a>
 </p>

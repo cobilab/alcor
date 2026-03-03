@@ -130,10 +130,27 @@ AlcoR simulation \
   > sample.fasta
 ```
 
-### 2) 🗺️ Map low-complexity regions
+### 2) 🗺️ Map low-complexity regions in a FASTA file
 
 ```bash
 AlcoR mapper -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 3 -t 0.5 sample.fasta
+```
+
+### 3) 🧼 Mask a FASTA file
+
+This example **detects LCRs** and writes a **masked FASTA** where LCR bases are converted to **lowercase**.
+
+```bash
+# Input: seq.fa
+# Output: masked.fa (LCRs in lowercase)
+AlcoR mapper \
+  --dna \
+  -m 13:50:0:1:10:0.9/5:10:0.9 \
+  -w 3 \
+  -t 0.5 \
+  -k \
+  -o masked.fa \
+  seq.fa
 ```
 
 ---

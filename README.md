@@ -135,8 +135,36 @@ AlcoR simulation \
 ```bash
 AlcoR mapper -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 3 -t 0.5 sample.fasta
 ```
+### 2) 🗺️ Map and visualize low-complexity regions in a haplotype-resolved genome
 
-### 3) 🧼 Mask a FASTA file
+This script, for a human haplotype-resolved genome, assumes that there is a fasta sequence for each human chromosome for each haplotype (for example, HG-C1-P.fa, HG-C1-M.fa, HG-C2-P.fa, HG-C2-M.fa, ..., HG-C23-M.fa, HG-C23-P.fa -- where HG-C23-M.fa and HG-C23-P.fa stands for CX and CY, respectively):
+```bash
+#!/bin/bash
+THRESHOLD="0.6";
+PARAM_DISTA=" -m 13:50:0:1:10:0.9/3:10:0.9 ";
+PARAM_LOCAL=" -m 13:50:5000:1:10:0.9/3:10:0.9 ";
+MIN_LEN=" --ignore 5000 ";
+WINDOW=" -w 5000 ";
+#
+for((x=1;x<=23;++x));
+  do
+  ./AlcoR mapper -v --hide --color 100 --threshold $THRESHOLD --dna $MIN_LEN $WINDOW $PARAM_DISTA HG-C${x}-P.fa > p-c-d-$x.txt
+  ./AlcoR mapper -v --hide --color 100 --threshold $THRESHOLD --dna $MIN_LEN $WINDOW $PARAM_DISTA HG-C${x}-M.fa > m-c-d-$x.txt
+  ./AlcoR mapper -v --no-size --hide --threshold $THRESHOLD --color 1 --dna $MIN_LEN $WINDOW $PARAM_LOCAL HG-C${x}-P.fa > p-c-l-$x.txt
+  ./AlcoR mapper -v --no-size --hide --threshold $THRESHOLD --color 1 --dna $MIN_LEN $WINDOW $PARAM_LOCAL HG-C${x}-M.fa > m-c-l-$x.txt
+  done
+#
+for((x=1;x<=23;++x));
+  do
+  cat p-c-d-$x.txt p-c-l-$x.txt > p-$x.txt;
+  cat m-c-d-$x.txt m-c-l-$x.txt > m-$x.txt;
+  done
+#
+./AlcoR visual -o map.svg -s 6 -w 18 -e 0 p-1.txt:m-1.txt:p-2.txt:m-2.txt:p-3.txt:m-3.txt:p-4.txt:m-4.txt:p-5.txt:m-5.txt:p-6.txt:m-6.txt:p-7.txt:m-7.txt:p-8.txt:m-8.txt:p-9.txt:m-9.txt:p-10.txt:m-10.txt:p-11.txt:m-11.txt:p-12.txt:m-12.txt:p-13.txt:m-13.txt:p-14.txt:m-14.txt:p-15.txt:m-15.txt:p-16.txt:m-16.txt:p-17.txt:m-17.txt:p-18.txt:m-18.txt:p-19.txt:m-19.txt:p-20.txt:m-20.txt:p-21.txt:m-21.txt:p-22.txt:m-22.txt:m-23.txt:p-23.txt
+
+```
+
+### 4) 🧼 Mask a FASTA file
 
 This example **detects LCRs** and writes a **masked FASTA** where LCR bases are converted to **lowercase**.
 

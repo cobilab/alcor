@@ -135,7 +135,7 @@ AlcoR simulation \
 ```bash
 AlcoR mapper -v -n -m 13:50:0:1:10:0.9/5:10:0.9 --dna -w 3 -t 0.5 sample.fasta
 ```
-### 2) 🗺️ Map and visualize low-complexity regions in a haplotype-resolved genome
+### 3) 🗺️ Map and visualize low-complexity regions in a haplotype-resolved genome
 
 This script, for a human haplotype-resolved genome, assumes that there is a fasta sequence for each human chromosome for each haplotype (for example, HG-C1-P.fa, HG-C1-M.fa, HG-C2-P.fa, HG-C2-M.fa, ..., HG-C23-M.fa, HG-C23-P.fa -- where HG-C23-M.fa and HG-C23-P.fa stands for CX and CY, respectively):
 ```bash
